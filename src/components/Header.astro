@@ -1,0 +1,132 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const navLinks = [
+  { href: `${base}/`, label: 'Início' },
+  { href: `${base}/sobre`, label: 'Sobre Nós' },
+  { href: `${base}/servicos`, label: 'Serviços' },
+  { href: `${base}/portfolio`, label: 'Portfólio & Artigos' },
+  { href: `${base}/contato`, label: 'Contato' },
+];
+
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+---
+
+<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-brand-bg-light/90 dark:bg-brand-dark/90 border-b border-brand-border-light dark:border-brand-border-dark transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logotipo Oficial com alternância automática Claro / Escuro -->
+      <a href={`${base}/`} class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-light rounded-sm p-1" aria-label="Quarto Analytics - Página Inicial">
+        <!-- Logo Modo Claro (logotipo_v2: Verde + Escuro) -->
+        <img
+          src={`${base}/images/logo/logo-light.png`}
+          alt="Quarto Analytics"
+          class="h-8 sm:h-10 w-auto block dark:hidden object-contain"
+          loading="eager"
+        />
+        <!-- Logo Modo Escuro (logotipo_v1: Verde + Claro) -->
+        <img
+          src={`${base}/images/logo/logo-dark.png`}
+          alt="Quarto Analytics"
+          class="h-8 sm:h-10 w-auto hidden dark:block object-contain"
+          loading="eager"
+        />
+      </a>
+
+      <!-- Navegação Desktop -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2" aria-label="Navegação Principal">
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href || (link.href !== `${base}/` && pathname.startsWith(link.href));
+          return (
+            <a
+              href={link.href}
+              class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                isActive
+                  ? 'text-brand-light font-semibold bg-brand-light/10'
+                  : 'text-brand-dark/80 dark:text-brand-white/80 hover:text-brand-light dark:hover:text-brand-light hover:bg-brand-light/5'
+              }`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })}
+      </nav>
+
+      <!-- Ações Direitas: Botão de Tema & CTA -->
+      <div class="hidden md:flex items-center gap-4">
+        <ThemeToggle />
+        <a
+          href={`${base}/contato`}
+          class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-light active:scale-95"
+        >
+          Falar com Especialista
+        </a>
+      </div>
+
+      <!-- Botão Hambúrguer Mobile -->
+      <div class="flex items-center gap-2 md:hidden">
+        <ThemeToggle />
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          class="p-2 rounded-md text-brand-dark dark:text-brand-white hover:bg-brand-light/10 focus:outline-none focus:ring-2 focus:ring-brand-light"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Abrir menu de navegação"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Mobile -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-4 pt-2 pb-6 space-y-2">
+    {navLinks.map((link) => {
+      const isActive = pathname === link.href || (link.href !== `${base}/` && pathname.startsWith(link.href));
+      return (
+        <a
+          href={link.href}
+          class={`block px-3 py-2 rounded-md text-base font-medium ${
+            isActive
+              ? 'text-brand-light font-semibold bg-brand-light/10'
+              : 'text-brand-dark dark:text-brand-white hover:text-brand-light dark:hover:text-brand-light hover:bg-brand-light/5'
+          }`}
+        >
+          {link.label}
+        </a>
+      );
+    })}
+    <div class="pt-4 border-t border-brand-border-light dark:border-brand-border-dark">
+      <a
+        href={`${base}/contato`}
+        class="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-colors"
+      >
+        Falar com Especialista
+      </a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  function setupMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('hidden');
+    });
+  }
+
+  setupMobileMenu();
+  document.addEventListener('astro:after-swap', setupMobileMenu);
+</script>
+

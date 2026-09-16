@@ -1,0 +1,55 @@
+---
+interface Props {
+  type?: 'note' | 'tip' | 'warning' | 'important' | 'danger';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+
+const config = {
+  note: {
+    border: 'border-l-brand-light',
+    bg: 'bg-brand-light/5',
+    text: 'text-brand-light',
+    defaultTitle: 'Nota',
+  },
+  tip: {
+    border: 'border-l-emerald-500',
+    bg: 'bg-emerald-500/10',
+    text: 'text-emerald-500',
+    defaultTitle: 'Dica Prática',
+  },
+  warning: {
+    border: 'border-l-amber-500',
+    bg: 'bg-amber-500/10',
+    text: 'text-amber-500',
+    defaultTitle: 'Atenção',
+  },
+  important: {
+    border: 'border-l-blue-500',
+    bg: 'bg-blue-500/10',
+    text: 'text-blue-500',
+    defaultTitle: 'Importante',
+  },
+  danger: {
+    border: 'border-l-red-500',
+    bg: 'bg-red-500/10',
+    text: 'text-red-500',
+    defaultTitle: 'Cuidado',
+  },
+};
+
+const current = config[type] || config.note;
+const displayTitle = title || current.defaultTitle;
+---
+
+<div class={`callout my-6 p-4 border-l-4 rounded-r-md ${current.border} ${current.bg} border-brand-border-light dark:border-brand-border-dark`}>
+  <div class={`flex items-center gap-2 font-semibold text-xs uppercase tracking-wider ${current.text} mb-2`}>
+    <span>✦</span>
+    <span>{displayTitle}</span>
+  </div>
+  <div class="text-sm text-brand-dark dark:text-brand-white leading-relaxed">
+    <slot />
+  </div>
+</div>
+

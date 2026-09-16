@@ -1,0 +1,182 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import CodeBlockCopy from '../components/CodeBlockCopy.astro';
+import ImageLightbox from '../components/ImageLightbox.astro';
+import { formatDate, calculateReadingTime } from '../utils/helpers';
+import '../styles/obsidian.css';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  heroImage?: string;
+  tags?: string[];
+  author?: string;
+  headings: { depth: number; slug: string; text: string }[];
+  rawContent?: string;
+}
+
+const {
+  title,
+  description,
+  publishDate,
+  heroImage,
+  tags = [],
+  author = 'Equipe Quarto',
+  headings = [],
+  rawContent = '',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const readTime = calculateReadingTime(rawContent || description);
+---
+
+<BaseLayout title={title} description={description} image={heroImage} articleDate={publishDate}>
+  <!-- Barra de Cabeçalho do Artigo -->
+  <header class="border-b border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark py-10 sm:py-14">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Navegação de Retorno -->
+      <a
+        href={`${base}/portfolio`}
+        class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-brand-light hover:underline mb-6"
+      >
+        ← Voltar ao Portfólio & Artigos
+      </a>
+
+      <!-- Tags / Categorias -->
+      <div class="flex flex-wrap gap-2 mb-4">
+        {tags.map((tag) => (
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-light/10 text-brand-light border border-brand-light/20">
+            #{tag}
+          </span>
+        ))}
+      </div>
+
+      <!-- Título Principal -->
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight leading-tight mb-4">
+        {title}
+      </h1>
+
+      <!-- Resumo Executivo -->
+      <p class="text-lg sm:text-xl text-brand-muted-light dark:text-brand-muted-dark leading-relaxed mb-6 font-normal">
+        {description}
+      </p>
+
+      <!-- Metadados de Autoria e Publicação -->
+      <div class="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-brand-muted-light dark:text-brand-muted-dark pt-4 border-t border-brand-border-light/60 dark:border-brand-border-dark/60">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-full bg-brand-light text-white font-bold flex items-center justify-center text-xs">
+            {author.charAt(0)}
+          </span>
+          <span class="font-medium text-brand-dark dark:text-brand-white">{author}</span>
+        </div>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-border-light dark:bg-brand-border-dark"></span>
+        <time datetime={publishDate.toISOString()}>
+          {formatDate(publishDate)}
+        </time>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-border-light dark:bg-brand-border-dark"></span>
+        <span class="flex items-center gap-1">
+          <svg class="w-4 h-4 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          {readTime} min de leitura técnica
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Imagem de Capa Opcional -->
+  {heroImage && (
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 mb-8">
+      <div class="rounded-xl overflow-hidden shadow-xl border border-brand-border-light dark:border-brand-border-dark max-h-[420px] bg-brand-surface-dark-elevated">
+        <img
+          src={heroImage.startsWith('http') || heroImage.startsWith('/') ? heroImage : `${base}/${heroImage.replace(/^\//, '')}`}
+          alt={`Capa de ${title}`}
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  )}
+
+  <!-- Área de Conteúdo Estilo Obsidian / Quartz -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+      <!-- Coluna de Leitura Central -->
+      <div class="lg:col-span-3">
+        <article class="obsidian-prose prose prose-lg dark:prose-invert max-w-none prose-headings:text-brand-dark dark:prose-headings:text-brand-white prose-p:text-brand-dark/90 dark:prose-p:text-brand-white/90">
+          <slot />
+        </article>
+
+        <!-- Rodapé do Artigo -->
+        <div class="mt-16 pt-8 border-t border-brand-border-light dark:border-brand-border-dark flex flex-col sm:flex-row items-center justify-between gap-4">
+          <a
+            href={`${base}/portfolio`}
+            class="text-sm font-semibold text-brand-light hover:underline flex items-center gap-1"
+          >
+            ← Voltar para todos os artigos
+          </a>
+          <a
+            href={`${base}/contato`}
+            class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-colors"
+          >
+            Solicitar Análise Semelhante
+          </a>
+        </div>
+      </div>
+
+      <!-- Sumário Lateral Fixo (Desktop) -->
+      <aside class="hidden lg:block lg:col-span-1">
+        <div class="sticky top-28 space-y-6">
+          <TableOfContents headings={headings} />
+
+          <div class="p-4 rounded-lg bg-brand-light/5 border border-brand-border-light dark:border-brand-border-dark text-xs">
+            <h4 class="font-bold text-brand-dark dark:text-brand-white uppercase tracking-wider mb-2">
+              Leitura Otimizada
+            </h4>
+            <p class="text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+              Equações matemáticas podem ser ampliadas tocando ou passando o mouse. Imagens e diagramas abrem em modal ao clicar.
+            </p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Componentes Utilitários de Artigo -->
+  <CodeBlockCopy />
+  <ImageLightbox />
+
+  <!-- Script para Renderização Automática de Callouts no formato Obsidian `> [!TIPO]` -->
+  <script is:inline>
+    function renderObsidianCallouts() {
+      const blockquotes = document.querySelectorAll('.obsidian-prose blockquote');
+      blockquotes.forEach((bq) => {
+        const text = bq.innerText.trim();
+        const match = text.match(/^\[!(NOTE|TIP|WARNING|IMPORTANT|DANGER|INFO|CAUTION)\](?:\s+(.*))?/i);
+        if (match) {
+          const type = match[1].toLowerCase();
+          const customTitle = match[2] || type.toUpperCase();
+
+          bq.classList.add('callout', `callout-${type}`);
+
+          // Remove a marcação [!TYPE] do primeiro elemento filho
+          const firstP = bq.querySelector('p');
+          if (firstP) {
+            firstP.innerHTML = firstP.innerHTML.replace(/^\[!(NOTE|TIP|WARNING|IMPORTANT|DANGER|INFO|CAUTION)\](?:\s+.*)?\n?/i, '');
+          }
+
+          // Cria elemento de título
+          const titleEl = document.createElement('div');
+          titleEl.className = 'callout-title';
+          titleEl.innerHTML = `<span>✦</span><span>${customTitle}</span>`;
+          bq.prepend(titleEl);
+        }
+      });
+    }
+
+    renderObsidianCallouts();
+    document.addEventListener('astro:after-swap', renderObsidianCallouts);
+  </script>
+</BaseLayout>
+

@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const principles = [
+  {
+    title: 'Rigor Estatístico e Empirismo',
+    desc: 'Não tomamos decisões por intuição. Cada modelo, métrica e pipeline é respaldado por hipóteses testáveis, validação cruzada rigorosa e análise de sensibilidade.',
+  },
+  {
+    title: 'Código Aberto e Soberania do Cliente',
+    desc: 'Sem soluções proprietárias aprisionantes (sem vendor lock-in). Entregamos repositórios limpos, versionados e com infraestrutura como código que pertencem 100% à sua empresa.',
+  },
+  {
+    title: 'Explicabilidade Acima da Caixa-Preta',
+    desc: 'Modelos de inteligência artificial precisam ser compreendidos pelos tomadores de decisão. Priorizamos formulações interpretáveis com decomposição Shapley e análise causal.',
+  },
+  {
+    title: 'Engenharia de Produção Desde o Dia 1',
+    desc: 'Projetos analíticos que não chegam à produção não geram valor. Todo o desenvolvimento já contempla testes de dados, observabilidade, CI/CD e governança de custos.',
+  },
+];
+
+const methodologySteps = [
+  {
+    step: '01',
+    title: 'Diagnóstico & Descoberta de Valor',
+    desc: 'Mapeamos o fluxo de ponta a ponta dos dados na organização, identificamos duplicidades, gargalos operacionais e calculamos o ROI potencial das iniciativas prioritárias.',
+  },
+  {
+    step: '02',
+    title: 'Fundação de Engenharia & Qualidade',
+    desc: 'Implementação de contratos de dados, pipelines idempotentes (batch ou streaming), camadas Bronze-Silver-Gold e testes de integridade automáticos via dbt.',
+  },
+  {
+    step: '03',
+    title: 'Modelagem Preditiva & Inteligência',
+    desc: 'Desenvolvimento e calibração de modelos estatísticos ou aprendizado de máquina com separação temporal rigorosa e explicabilidade de fatores determinantes.',
+  },
+  {
+    step: '04',
+    title: 'Ativação Analítica & Treinamento',
+    desc: 'Conexão com ferramentas de consumo executivo (BI, APIs, alertas operacionais), documentação estilo Quartz e capacitação dos times internos para autonomia completa.',
+  },
+];
+---
+
+<BaseLayout
+  title="Sobre Nós & Metodologia de Trabalho"
+  description="Conheça a Quarto Analytics, nossa metodologia de engenharia e ciência de dados e nossos compromissos com rigor técnico e soberania do cliente."
+>
+  <!-- Cabeçalho Institucional -->
+  <section class="py-16 sm:py-20 border-b border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-light/10 text-brand-light border border-brand-light/20 mb-4">
+        Institucional
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight mb-6">
+        Engenharia e inteligência analítica para problemas de alta complexidade.
+      </h1>
+      <p class="text-lg text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+        A Quarto Analytics nasceu da convicção de que empresas líderes precisam de parceiros técnicos que combinem profundidade matemática com excelência em engenharia de software para transformar dados brutos em vantagem competitiva perene.
+      </p>
+    </div>
+  </section>
+
+  <!-- Manifesto & Apresentação -->
+  <section class="py-16 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="space-y-6 text-base sm:text-lg text-brand-dark/90 dark:text-brand-white/90 leading-relaxed font-normal">
+      <h2 class="text-2xl sm:text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
+        Quem Somos
+      </h2>
+      <p>
+        Somos uma consultoria técnica boutique focada em três pilares integrados: <strong>Engenharia de Plataformas de Dados</strong>, <strong>Modelagem Estatística & Machine Learning</strong> e <strong>Business Intelligence Executivo</strong>.
+      </p>
+      <p>
+        Em um mercado saturado de promessas superficiais de "transformação digital", posicionamo-nos como engenheiros e cientistas pragmáticos. Desenvolvemos soluções com arquiteturas modernas (Apache Iceberg, DuckDB, Trino, dbt, Python, XGBoost) que reduzem despesas com infraestrutura em nuvem enquanto multiplicam a precisão decisória.
+      </p>
+    </div>
+  </section>
+
+  <!-- Princípios Inegociáveis -->
+  <section class="py-16 bg-brand-surface-light dark:bg-brand-surface-dark border-t border-b border-brand-border-light dark:border-brand-border-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
+          Nossa Filosofia
+        </h2>
+        <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
+          Princípios Inegociáveis de Engenharia
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {principles.map((p) => (
+          <div class="p-8 rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-bg-light dark:bg-brand-dark">
+            <h3 class="text-lg font-bold text-brand-dark dark:text-brand-white mb-3 flex items-center gap-2">
+              <span class="text-brand-light">✓</span>
+              {p.title}
+            </h3>
+            <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+              {p.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Metodologia de Trabalho Detalhada -->
+  <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mb-16">
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
+        Processo Estruturado
+      </h2>
+      <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
+        O Ciclo Analítico da Quarto Analytics
+      </p>
+      <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark mt-2 leading-relaxed">
+        Uma adaptação moderna do framework CRISP-DM focada em entregas contínuas, validação precoce e zero retrabalho.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {methodologySteps.map((m) => (
+        <div class="relative p-6 rounded-lg bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark flex flex-col justify-between">
+          <div>
+            <div class="text-3xl font-black text-brand-light/30 font-mono mb-4">
+              {m.step}
+            </div>
+            <h3 class="text-lg font-bold text-brand-dark dark:text-brand-white mb-3">
+              {m.title}
+            </h3>
+            <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+              {m.desc}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Credenciais da Equipe -->
+  <section class="py-16 bg-brand-surface-light dark:bg-brand-surface-dark border-t border-brand-border-light dark:border-brand-border-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight mb-4">
+        Liderança Técnica com Experiência Comprovada
+      </h2>
+      <p class="text-sm sm:text-base text-brand-muted-light dark:text-brand-muted-dark leading-relaxed mb-8">
+        Nossos consultores possuem sólida formação em Ciência da Computação, Estatística e Economia Aplicada, tendo liderado projetos de escala crítica em empresas de tecnologia, instituições financeiras e indústrias de ponta.
+      </p>
+      <div class="inline-flex flex-wrap justify-center gap-4">
+        <a
+          href={`${base}/portfolio`}
+          class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md transition-all shadow-sm"
+        >
+          Examinar Nossos Estudos de Caso
+        </a>
+        <a
+          href={`${base}/contato`}
+          class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-brand-dark dark:text-brand-white border border-brand-border-light dark:border-brand-border-dark hover:border-brand-light rounded-md transition-colors"
+        >
+          Conversar com Nossa Equipe
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

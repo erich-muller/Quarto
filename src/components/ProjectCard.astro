@@ -1,0 +1,71 @@
+---
+import { formatDate, calculateReadingTime } from '../utils/helpers';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  slug: string;
+  tags?: string[];
+  heroImage?: string;
+  body?: string;
+}
+
+const { title, description, publishDate, slug, tags = [], heroImage, body = '' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const readTime = calculateReadingTime(body || description);
+---
+
+<article class="group relative flex flex-col bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-light dark:hover:border-brand-light hover:shadow-lg">
+  {heroImage && (
+    <div class="relative w-full h-48 bg-brand-dark/10 dark:bg-brand-surface-dark-elevated overflow-hidden">
+      <img
+        src={heroImage.startsWith('http') || heroImage.startsWith('/') ? heroImage : `${base}/${heroImage.replace(/^\//, '')}`}
+        alt={`Capa do artigo: ${title}`}
+        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+      />
+    </div>
+  )}
+
+  <div class="flex-1 p-6 flex flex-col justify-between">
+    <div>
+      <!-- Metadados: Data e Tempo de Leitura -->
+      <div class="flex items-center gap-3 text-xs text-brand-muted-light dark:text-brand-muted-dark mb-3">
+        <time datetime={publishDate.toISOString()}>
+          {formatDate(publishDate)}
+        </time>
+        <span class="inline-block w-1 h-1 rounded-full bg-brand-border-light dark:bg-brand-border-dark"></span>
+        <span>{readTime} min de leitura</span>
+      </div>
+
+      <!-- Título -->
+      <h3 class="text-xl font-bold text-brand-dark dark:text-brand-white group-hover:text-brand-light transition-colors mb-2 line-clamp-2">
+        <a href={`${base}/portfolio/${slug}`} class="focus:outline-none">
+          <span class="absolute inset-0" aria-hidden="true"></span>
+          {title}
+        </a>
+      </h3>
+
+      <!-- Resumo -->
+      <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark line-clamp-3 mb-4 leading-relaxed">
+        {description}
+      </p>
+    </div>
+
+    <!-- Tags e Indicador de Leitura -->
+    <div class="pt-4 border-t border-brand-border-light/60 dark:border-brand-border-dark/60 flex items-center justify-between gap-2">
+      <div class="flex flex-wrap gap-1.5">
+        {tags.slice(0, 3).map((tag) => (
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-brand-light/10 text-brand-light">
+            #{tag}
+          </span>
+        ))}
+      </div>
+      <span class="text-xs font-semibold text-brand-light group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+        Ler Artigo →
+      </span>
+    </div>
+  </div>
+</article>
+

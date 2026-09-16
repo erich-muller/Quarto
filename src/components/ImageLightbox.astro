@@ -1,0 +1,81 @@
+---
+// Componente de Lightbox / Visualizador de Imagens Técnicas e Diagramas
+---
+
+<div
+  id="image-lightbox-modal"
+  class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm p-4 sm:p-8 flex items-center justify-center transition-opacity duration-200"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Visualizador de Imagem Ampliada"
+>
+  <button
+    id="lightbox-close-btn"
+    type="button"
+    class="absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-brand-light"
+    aria-label="Fechar visualizador"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <div class="max-w-5xl max-h-full flex flex-col items-center">
+    <img
+      id="lightbox-img"
+      src=""
+      alt=""
+      class="max-w-full max-h-[85vh] object-contain rounded-md shadow-2xl border border-white/10"
+    />
+    <p id="lightbox-caption" class="text-white/80 text-xs sm:text-sm mt-3 text-center font-mono"></p>
+  </div>
+</div>
+
+<script is:inline>
+  function setupLightbox() {
+    const modal = document.getElementById('image-lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img');
+    const modalCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.getElementById('lightbox-close-btn');
+
+    if (!modal || !modalImg || !closeBtn) return;
+
+    // Conecta todas as imagens do artigo ao modal
+    const articleImages = document.querySelectorAll('.obsidian-prose img');
+
+    articleImages.forEach((img) => {
+      img.style.cursor = 'zoom-in';
+      img.setAttribute('title', 'Clique para ampliar');
+      img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        modalImg.alt = img.alt || 'Visualização ampliada';
+        modalCaption.textContent = img.alt || '';
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modalImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  }
+
+  setupLightbox();
+  document.addEventListener('astro:after-swap', setupLightbox);
+</script>
+

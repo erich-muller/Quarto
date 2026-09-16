@@ -1,0 +1,167 @@
+/* ==========================================================================
+   Obsidian & Quartz Reading Experience Stylesheet
+   Quarto Analytics - Technical Article Reader
+   ========================================================================== */
+
+/* Prose adjustments for technical reading */
+.obsidian-prose {
+  line-height: 1.75;
+  font-size: 1.0625rem;
+}
+
+.obsidian-prose p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.obsidian-prose h1,
+.obsidian-prose h2,
+.obsidian-prose h3,
+.obsidian-prose h4 {
+  scroll-margin-top: 5.5rem;
+  position: relative;
+}
+
+.obsidian-prose h2 {
+  margin-top: 2.2em;
+  margin-bottom: 0.8em;
+  font-size: 1.5rem;
+}
+
+.obsidian-prose h3 {
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+  font-size: 1.25rem;
+}
+
+/* Obsidian Callouts */
+.callout {
+  margin: 1.5rem 0;
+  padding: 0.875rem 1.125rem;
+  border-left-width: 4px;
+  border-radius: 0.375rem;
+  background-color: rgba(31, 160, 92, 0.06);
+  border-left-color: #1FA05C;
+}
+
+.callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.callout-note {
+  border-left-color: #1FA05C;
+  background-color: rgba(31, 160, 92, 0.08);
+}
+.callout-note .callout-title {
+  color: #1FA05C;
+}
+
+.callout-tip {
+  border-left-color: #10B981;
+  background-color: rgba(16, 185, 129, 0.08);
+}
+.callout-tip .callout-title {
+  color: #10B981;
+}
+
+.callout-warning {
+  border-left-color: #F59E0B;
+  background-color: rgba(245, 158, 11, 0.08);
+}
+.callout-warning .callout-title {
+  color: #F59E0B;
+}
+
+.callout-danger,
+.callout-important {
+  border-left-color: #EF4444;
+  background-color: rgba(239, 68, 68, 0.08);
+}
+.callout-danger .callout-title,
+.callout-important .callout-title {
+  color: #EF4444;
+}
+
+/* KaTeX mathematical formulas */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem 0;
+  margin: 1.5rem 0 !important;
+}
+
+.katex {
+  font-size: 1.1em;
+}
+
+/* Code blocks (Shiki) */
+.obsidian-prose pre {
+  position: relative;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(31, 160, 92, 0.25);
+  background-color: #02160E !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.obsidian-prose pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6;
+  border-radius: 0;
+}
+
+/* Inline code */
+.obsidian-prose :not(pre) > code {
+  background-color: rgba(31, 160, 92, 0.12);
+  color: #1FA05C;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.88em;
+  border: 1px solid rgba(31, 160, 92, 0.2);
+}
+
+.dark .obsidian-prose :not(pre) > code {
+  color: #38D385;
+}
+
+/* Technical images with zoom capability */
+.obsidian-prose img {
+  border-radius: 0.5rem;
+  border: 1px solid rgba(31, 160, 92, 0.2);
+  margin: 2rem auto;
+  cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.obsidian-prose img:hover {
+  box-shadow: 0 8px 24px rgba(31, 160, 92, 0.15);
+}
+
+/* Technical table */
+.obsidian-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+}
+
+.obsidian-prose th,
+.obsidian-prose td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(31, 160, 92, 0.2);
+  text-align: left;
+}
+
+.obsidian-prose th {
+  background-color: rgba(31, 160, 92, 0.08);
+  font-weight: 600;
+}
+

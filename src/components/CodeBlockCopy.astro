@@ -1,0 +1,59 @@
+---
+// Injeta botão de cópia com feedback visual em todos os blocos de código <pre><code>
+---
+
+<script is:inline>
+  function setupCodeBlockCopy() {
+    const codeBlocks = document.querySelectorAll('pre');
+
+    codeBlocks.forEach((block) => {
+      // Evita duplicar botões se reexecutado
+      if (block.querySelector('.code-copy-btn')) return;
+
+      block.style.position = 'relative';
+
+      // Cria botão de cópia
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'code-copy-btn absolute top-3 right-3 px-2.5 py-1 text-xs font-mono font-medium text-brand-muted-dark hover:text-brand-white bg-brand-surface-dark-elevated/80 hover:bg-brand-light/30 border border-brand-border-dark rounded transition-all flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-brand-light';
+      copyBtn.type = 'button';
+      copyBtn.setAttribute('aria-label', 'Copiar código para a área de transferência');
+      copyBtn.innerHTML = `
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+        </svg>
+        <span>Copiar</span>
+      `;
+
+      copyBtn.addEventListener('click', async () => {
+        const codeElement = block.querySelector('code');
+        const textToCopy = codeElement ? codeElement.innerText : block.innerText;
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          copyBtn.innerHTML = `
+            <svg class="w-3.5 h-3.5 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <span class="text-brand-light font-bold">Copiado!</span>
+          `;
+          setTimeout(() => {
+            copyBtn.innerHTML = `
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+              </svg>
+              <span>Copiar</span>
+            `;
+          }, 2000);
+        } catch (err) {
+          console.error('Falha ao copiar código:', err);
+        }
+      });
+
+      block.appendChild(copyBtn);
+    });
+  }
+
+  setupCodeBlockCopy();
+  document.addEventListener('astro:after-swap', setupCodeBlockCopy);
+</script>
+

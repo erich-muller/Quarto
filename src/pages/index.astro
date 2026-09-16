@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Busca artigos em destaque ou os mais recentes
+const allArticles = await getCollection('portfolio');
+const sortedArticles = allArticles.sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+const featuredArticles = sortedArticles.filter((a) => a.data.featured).slice(0, 3);
+const displayArticles = featuredArticles.length > 0 ? featuredArticles : sortedArticles.slice(0, 3);
+
+const services = [
+  {
+    icon: 'M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7zm0 4h16M4 15h16',
+    title: 'Engenharia de Dados & Lakehouse',
+    description: 'Pipelines modernos de ingestão em streaming e batch, modelagem dimensional robusta, Apache Iceberg e infraestrutura de alta confiabilidade.',
+  },
+  {
+    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+    title: 'Business Intelligence & Decisão Executiva',
+    description: 'Dashboards analíticos de alta densidade informacional, métricas padronizadas e camada semântica única para alinhamento entre diretoria e operações.',
+  },
+  {
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    title: 'Machine Learning & Ciência de Dados',
+    description: 'Modelagem preditiva (churn, fraude, LTV, precificação dinâmica) com ênfase em interpretabilidade estatística, validação contínua e valor econômico real.',
+  },
+  {
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    title: 'Governança de Dados & FinOps Analítico',
+    description: 'Auditoria de integridade, linhagem de dados, catálogos automatizados e otimização de custos de computação em nuvem (Snowflake, BigQuery, AWS).',
+  },
+];
+
+const metrics = [
+  { value: '+R$ 45M', label: 'Valor Econômico Gerado para Clientes' },
+  { value: 'sub-10min', label: 'Latência Máxima de Atualização Analítica' },
+  { value: '99.95%', label: 'Confiabilidade em Testes de Integridade' },
+  { value: '100%', label: 'Código Auditável e Soberania do Cliente' },
+];
+---
+
+<BaseLayout
+  title="Consultoria Estratégica em Análise e Engenharia de Dados"
+  description="A Quarto Analytics estrutura ecossistemas modernos de dados, modelos de machine learning e plataformas analíticas para decisões corporativas de alta precisão."
+>
+  <!-- Hero Section Minimalista e Sólido -->
+  <section class="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 border-b border-brand-border-light dark:border-brand-border-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <!-- Tagline Superior -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-light/10 text-brand-light border border-brand-light/20 mb-6">
+          <span class="w-2 h-2 rounded-full bg-brand-light animate-pulse"></span>
+          Consultoria de Dados & Analytics Avançado
+        </div>
+
+        <!-- Título Principal com Autoridade -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight leading-[1.15] mb-6">
+          Transformamos dados complexos em <span class="text-brand-light">decisões de alto impacto</span>.
+        </h1>
+
+        <!-- Proposta de Valor -->
+        <p class="text-lg sm:text-xl text-brand-muted-light dark:text-brand-muted-dark leading-relaxed mb-8">
+          Apoiamos organizações na construção de plataformas de dados modernas, modelagem preditiva estatística e arquitetura analítica robusta. Sem modismos, com código aberto e foco estrito no resultado financeiro.
+        </p>
+
+        <!-- Botões de Ação Direta -->
+        <div class="flex flex-wrap items-center gap-4">
+          <a
+            href={`${base}/contato`}
+            class="inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-light active:scale-95"
+          >
+            Agendar Diagnóstico Técnico
+          </a>
+          <a
+            href={`${base}/portfolio`}
+            class="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-brand-dark dark:text-brand-white bg-brand-surface-light dark:bg-brand-surface-dark hover:border-brand-light border border-brand-border-light dark:border-brand-border-dark rounded-md transition-colors"
+          >
+            Explorar Estudos de Caso →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Métricas e Indicadores de Impacto -->
+  <section class="py-12 bg-brand-surface-light dark:bg-brand-surface-dark border-b border-brand-border-light dark:border-brand-border-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        {metrics.map((item) => (
+          <div class="border-l-2 border-brand-light pl-4">
+            <div class="text-2xl sm:text-3xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight font-mono">
+              {item.value}
+            </div>
+            <div class="text-xs sm:text-sm text-brand-muted-light dark:text-brand-muted-dark mt-1 leading-snug">
+              {item.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Resumo dos Serviços de Consultoria -->
+  <section class="py-20 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div>
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
+          Capacidades Analíticas
+        </h2>
+        <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
+          Soluções de Consultoria de Ponta a Ponta
+        </p>
+      </div>
+      <a
+        href={`${base}/servicos`}
+        class="mt-4 md:mt-0 text-sm font-semibold text-brand-light hover:underline flex items-center gap-1"
+      >
+        Ver detalhamento de serviços →
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {services.map((srv) => (
+        <div class="p-8 rounded-lg bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark hover:border-brand-light dark:hover:border-brand-light transition-all">
+          <div class="w-12 h-12 rounded-md bg-brand-light/10 text-brand-light flex items-center justify-center mb-6">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={srv.icon} />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-brand-dark dark:text-brand-white mb-3">
+            {srv.title}
+          </h3>
+          <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+            {srv.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Destaques do Portfólio & Artigos Técnicos -->
+  <section class="py-20 bg-brand-surface-light dark:bg-brand-surface-dark border-t border-b border-brand-border-light dark:border-brand-border-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
+            Pesquisa & Prática
+          </h2>
+          <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
+            Artigos Técnicos e Estudos de Caso
+          </p>
+          <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark mt-2">
+            Metodologias abertas com formulações matemáticas, código reproduzível e resultados empíricos.
+          </p>
+        </div>
+        <a
+          href={`${base}/portfolio`}
+          class="mt-4 md:mt-0 text-sm font-semibold text-brand-light hover:underline flex items-center gap-1"
+        >
+          Ver todo o portfólio ({allArticles.length}) →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {displayArticles.map((article) => (
+          <ProjectCard
+            title={article.data.title}
+            description={article.data.description}
+            publishDate={article.data.publishDate}
+            slug={article.slug}
+            tags={article.data.tags}
+            heroImage={article.data.heroImage}
+            body={article.body}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Metodologia Sintética -->
+  <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mb-12">
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
+        Como Trabalhamos
+      </h2>
+      <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
+        Rigor Científico com Velocidade Operacional
+      </p>
+      <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark mt-2 leading-relaxed">
+        Não entregamos apenas relatórios estáticos. Construímos sistemas analíticos duradouros que passam a pertencer à sua equipe.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="p-6 rounded-md bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark">
+        <div class="text-xs font-mono font-bold text-brand-light mb-2">01. IMERSÃO</div>
+        <h3 class="text-base font-bold text-brand-dark dark:text-brand-white mb-2">Mapeamento de Gargalos</h3>
+        <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+          Auditoria da topologia atual de dados, fontes de atrito e identificação de alavancas de retorno sobre investimento.
+        </p>
+      </div>
+      <div class="p-6 rounded-md bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark">
+        <div class="text-xs font-mono font-bold text-brand-light mb-2">02. ENGENHARIA</div>
+        <h3 class="text-base font-bold text-brand-dark dark:text-brand-white mb-2">Modelagem & Pipelines</h3>
+        <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+          Estruturação de tabelas transacionais, deduplicação idempotente e linhagem automatizada com testes de dados.
+        </p>
+      </div>
+      <div class="p-6 rounded-md bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark">
+        <div class="text-xs font-mono font-bold text-brand-light mb-2">03. INTELIGÊNCIA</div>
+        <h3 class="text-base font-bold text-brand-dark dark:text-brand-white mb-2">Algoritmos & Decisão</h3>
+        <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+          Treinamento de modelos preditivos calibrados, análise quantitativa e painéis executivos de alto contraste.
+        </p>
+      </div>
+      <div class="p-6 rounded-md bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark">
+        <div class="text-xs font-mono font-bold text-brand-light mb-2">04. AUTONOMIA</div>
+        <h3 class="text-base font-bold text-brand-dark dark:text-brand-white mb-2">Transferência & Cultura</h3>
+        <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+          Documentação técnica no estilo Quartz, capacitação dos times internos e sustentação dos ativos analíticos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chamada Final para Contato -->
+  <section class="py-16 bg-brand-surface-dark-elevated border-t border-brand-border-dark text-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 text-brand-white">
+        Pronto para elevar o padrão analítico da sua organização?
+      </h2>
+      <p class="text-base sm:text-lg text-brand-muted-dark max-w-2xl mx-auto mb-8 leading-relaxed">
+        Converse diretamente com nossos consultores técnicos e receba uma avaliação preliminar da viabilidade do seu projeto de dados.
+      </p>
+      <a
+        href={`${base}/contato`}
+        class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-brand-light"
+      >
+        Solicitar Contato Especializado
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+

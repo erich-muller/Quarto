@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://erich-muller.github.io/Quarto/sitemap-index.xml
+

@@ -1,0 +1,38 @@
+backend:
+  name: github
+  repo: erich-muller/Quarto
+  branch: main
+  # Se utilizar um servidor de autenticação próprio (ex: Cloudflare Worker ou Netlify), configure:
+  # base_url: https://seu-oauth-gateway.com
+  # auth_endpoint: auth
+
+# Habilita o backend local para desenvolvimento sem necessidade de push imediato
+local_backend: true
+
+# Configurações de mídia
+media_folder: "public/images/portfolio"
+public_folder: "/Quarto/images/portfolio"
+
+# Configurações do editor
+display_url: "https://erich-muller.github.io/Quarto"
+logo_url: "/Quarto/images/logo/logo-dark.png"
+locale: "pt"
+
+collections:
+  - name: "portfolio"
+    label: "Portfólio / Artigos"
+    label_singular: "Artigo Técnico"
+    folder: "src/content/portfolio"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "portfolio/{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Data de Publicação", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Descrição Resumida", name: "description", widget: "text" }
+      - { label: "Imagem de Capa", name: "heroImage", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: ["Analytics", "Consultoria"] }
+      - { label: "Destaque na Página Inicial?", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Autor", name: "author", widget: "string", default: "Equipe Quarto" }
+      - { label: "Conteúdo Técnico", name: "body", widget: "markdown" }
+

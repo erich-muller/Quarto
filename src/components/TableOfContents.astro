@@ -1,0 +1,38 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{filteredHeadings.length > 0 && (
+  <nav class="toc-container p-4 rounded-lg bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark text-sm" aria-label="Sumário do Artigo">
+    <div class="flex items-center gap-2 font-semibold text-xs uppercase tracking-wider text-brand-dark dark:text-brand-white mb-3">
+      <svg class="w-4 h-4 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h7"/>
+      </svg>
+      <span>Nesta Página</span>
+    </div>
+    <ul class="space-y-2 border-l border-brand-border-light dark:border-brand-border-dark pl-2">
+      {filteredHeadings.map((heading) => (
+        <li class={heading.depth === 3 ? 'ml-3' : ''}>
+          <a
+            href={`#${heading.slug}`}
+            class="block py-0.5 text-xs text-brand-muted-light dark:text-brand-muted-dark hover:text-brand-light dark:hover:text-brand-light hover:underline transition-colors"
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+

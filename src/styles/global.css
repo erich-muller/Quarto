@@ -1,0 +1,71 @@
+@import "katex/dist/katex.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #F7FAF8;
+    --color-surface: #FFFFFF;
+    --color-surface-elevated: #EAEAEA;
+    --color-border: #D1DDD6;
+    --color-text-main: #02160E;
+    --color-text-muted: #4A6256;
+    --color-brand-primary: #1FA05C;
+    --color-brand-dark: #02160E;
+  }
+
+  .dark {
+    --color-bg: #02160E;
+    --color-surface: #052418;
+    --color-surface-elevated: #0A3323;
+    --color-border: #134B34;
+    --color-text-main: #EAEAEA;
+    --color-text-muted: #8BA698;
+    --color-brand-primary: #1FA05C;
+    --color-brand-dark: #02160E;
+  }
+
+  html {
+    font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    scroll-behavior: smooth;
+    color-scheme: light dark;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: #1FA05C;
+    color: #FFFFFF;
+  }
+}
+
+/* Scrollbar refinada e discreta */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(31, 160, 92, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(31, 160, 92, 0.5);
+}
+
