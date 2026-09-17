@@ -120,7 +120,7 @@ const readTime = calculateReadingTime(rawContent || description);
             href={`${base}/contato`}
             class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-colors"
           >
-            Solicitar Proposta Semelhante
+            Falar com a Delta Data
           </a>
         </div>
       </div>
@@ -147,37 +147,69 @@ const readTime = calculateReadingTime(rawContent || description);
   <CodeBlockCopy />
   <ImageLightbox />
 
-  <!-- Script para Renderização Automática de Callouts no formato Obsidian `> [!TIPO]` -->
+  <!-- Script para Renderização Precisa de Callouts Obsidian e Tabelas Responsivas -->
   <script is:inline>
     function renderObsidianCallouts() {
       const blockquotes = document.querySelectorAll('.obsidian-prose blockquote');
       blockquotes.forEach((bq) => {
-        const text = bq.innerText.trim();
-        const match = text.match(/^\[!(NOTE|TIP|WARNING|IMPORTANT|DANGER|INFO|CAUTION)\](?:\s+(.*))?/i);
-        if (match) {
-          const type = match[1].toLowerCase();
-          const customTitle = match[2] || type.toUpperCase();
+        if (bq.classList.contains('callout')) return;
 
-          bq.classList.add('callout', `callout-${type}`);
+        const firstP = bq.querySelector('p');
+        if (!firstP) return;
 
-          const firstP = bq.querySelector('p');
-          if (firstP) {
-            firstP.innerHTML = firstP.innerHTML.replace(/^\[!(NOTE|TIP|WARNING|IMPORTANT|DANGER|INFO|CAUTION)\](?:\s+.*)?\n?/i, '');
-          }
+        const firstChild = firstP.firstChild;
+        if (!firstChild || firstChild.nodeType !== Node.TEXT_NODE) return;
 
-          const titleEl = document.createElement('div');
-          titleEl.className = 'callout-title';
-          titleEl.innerHTML = `<span>✦</span><span>${customTitle}</span>`;
-          bq.prepend(titleEl);
+        const text = firstChild.textContent || '';
+        // Captura [!TIPO] e o título estritamente na PRIMEIRA linha
+        const match = text.match(/^\[!([A-Za-z]+)\][ \t]*(.*?)(?:\r?\n|$)([\s\S]*)/);
+        if (!match) return;
+
+        const calloutType = match[1].toLowerCase();
+        const customTitle = match[2].trim();
+        const remainingText = match[3];
+
+        // Atualiza o nó de texto para conter APENAS o corpo restante (sem engolir KaTeX ou parágrafos)
+        firstChild.textContent = remainingText;
+
+        bq.classList.add('callout', `callout-${calloutType}`);
+
+        // Cria cabeçalho exclusivo do título
+        const titleEl = document.createElement('div');
+        titleEl.className = 'callout-title';
+        const displayTitle = customTitle || calloutType.toUpperCase();
+        titleEl.innerHTML = `<span class="callout-icon">✦</span><span>${displayTitle}</span>`;
+        bq.insertBefore(titleEl, firstP);
+
+        // Se o primeiro parágrafo ficou vazio (quando havia linha em branco no MD), remove
+        if (!firstP.textContent.trim() && firstP.children.length === 0) {
+          firstP.remove();
         }
       });
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', renderObsidianCallouts);
-    } else {
-      renderObsidianCallouts();
+    function wrapResponsiveTables() {
+      const tables = document.querySelectorAll('.obsidian-prose table');
+      tables.forEach((table) => {
+        if (table.parentElement && table.parentElement.classList.contains('table-scroll-container')) return;
+
+        const container = document.createElement('div');
+        container.className = 'table-scroll-container overflow-x-auto my-6 rounded-lg border border-brand-border-light dark:border-brand-border-dark';
+        table.parentNode.insertBefore(container, table);
+        container.appendChild(table);
+      });
     }
-    document.addEventListener('astro:after-swap', renderObsidianCallouts);
+
+    function initArticleEnhancements() {
+      renderObsidianCallouts();
+      wrapResponsiveTables();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initArticleEnhancements);
+    } else {
+      initArticleEnhancements();
+    }
+    document.addEventListener('astro:after-swap', initArticleEnhancements);
   </script>
 </BaseLayout>

@@ -150,11 +150,21 @@
   box-shadow: 0 8px 24px rgba(31, 160, 92, 0.15);
 }
 
-/* Technical table */
+/* Technical table com scroll container */
+.table-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-scroll-container table {
+  margin: 0 !important;
+  min-width: 520px;
+}
+
 .obsidian-prose table {
   width: 100%;
   border-collapse: collapse;
-  margin: 2rem 0;
 }
 
 .obsidian-prose th,
@@ -173,3 +183,4 @@
   background-color: rgba(31, 160, 92, 0.06);
   font-weight: 600;
 }
+

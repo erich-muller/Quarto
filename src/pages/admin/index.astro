@@ -1,5 +1,5 @@
 ---
-// Rota nativa do Astro para o Painel Editorial do Decap CMS
+// Rota nativa do Astro para o Painel Editorial do Decap CMS com tema Delta Data
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
@@ -9,31 +9,174 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel Editorial | Delta Data - UFV</title>
-    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <link rel="icon" type="image/png" href={`${base}/favicon.png`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <!-- Informa ao Decap onde está o arquivo config.yml -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+    
+    <!-- Configuração YAML do Decap CMS -->
     <link href={`${base}/admin/config.yml`} type="text/yaml" rel="cms-config-url" />
+
+    <!-- KaTeX para renderização de fórmulas matemáticas no preview -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Customização Visual do Painel Editorial Decap CMS -->
     <style>
       :root {
         --brand-dark: #02160E;
         --brand-light: #1FA05C;
-        --brand-white: #EAEAEA;
+        --brand-accent-hover: #26BD6E;
+        --brand-bg: #0B0F12;
+        --brand-surface: #141A1E;
+        --brand-border: #263036;
       }
+
       body {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Montserrat', system-ui, sans-serif !important;
+        background-color: #F9FAFB !important;
         margin: 0;
-        background-color: #F9FAFB;
       }
-      header {
+
+      /* Barra de Navegação Superior do Decap CMS */
+      header,
+      [class*="AppHeader"] {
+        background-color: var(--brand-bg) !important;
         border-bottom: 2px solid var(--brand-light) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+      }
+
+      /* Botões de Ação Primários (Publicar, Salvar, Novo) */
+      button[class*="button-default"],
+      button[class*="Button"],
+      [class*="PublishButton"],
+      [class*="SaveButton"] {
+        background-color: var(--brand-light) !important;
+        color: #FFFFFF !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 600 !important;
+        border-radius: 6px !important;
+        border: none !important;
+        transition: all 0.2s ease !important;
+      }
+
+      button[class*="button-default"]:hover,
+      button[class*="Button"]:hover,
+      [class*="PublishButton"]:hover,
+      [class*="SaveButton"]:hover {
+        background-color: var(--brand-accent-hover) !important;
+        transform: translateY(-1px);
+      }
+
+      /* Cards das Coleções */
+      [class*="CardContainer"],
+      [class*="CollectionCard"] {
+        border-radius: 8px !important;
+        border: 1px solid #E5E7EB !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+      }
+
+      /* Tipografia dos Títulos */
+      h1, h2, h3, h4, [class*="Heading"] {
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 700 !important;
       }
     </style>
   </head>
   <body>
-    <!-- Decap CMS Script Oficial via CDN -->
+    <!-- Decap CMS Script Oficial -->
     <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+
+    <!-- Customização de Preview com Suporte a Callouts Obsidian e KaTeX -->
+    <script is:inline define:vars={{ base }}>
+      if (window.CMS) {
+        // Registra fontes e estilos no iframe de pré-visualização
+        CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono&display=swap');
+        CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css');
+        CMS.registerPreviewStyle(base + '/admin/preview.css');
+
+        // Cria o componente de Preview customizado para a coleção 'portfolio'
+        const PortfolioPreview = createClass({
+          componentDidMount: function () {
+            this.enhancePreview();
+          },
+          componentDidUpdate: function () {
+            this.enhancePreview();
+          },
+          enhancePreview: function () {
+            setTimeout(() => {
+              const iframes = document.querySelectorAll('iframe');
+              iframes.forEach((iframe) => {
+                const doc = iframe.contentDocument || iframe.contentWindow?.document;
+                if (!doc) return;
+
+                // 1. Processa Callouts Obsidian (> [!NOTE], > [!TIP], etc.)
+                doc.querySelectorAll('blockquote').forEach((bq) => {
+                  if (bq.classList.contains('callout')) return;
+
+                  const firstP = bq.querySelector('p');
+                  if (!firstP) return;
+
+                  const firstChild = firstP.firstChild;
+                  if (!firstChild || firstChild.nodeType !== Node.TEXT_NODE) return;
+
+                  const text = firstChild.textContent || '';
+                  const match = text.match(/^\[!([A-Za-z]+)\][ \t]*(.*?)(?:\r?\n|$)([\s\S]*)/);
+                  if (!match) return;
+
+                  const type = match[1].toLowerCase();
+                  const customTitle = match[2].trim() || type.toUpperCase();
+                  firstChild.textContent = match[3];
+
+                  bq.classList.add('callout', 'callout-' + type);
+
+                  const titleEl = doc.createElement('div');
+                  titleEl.className = 'callout-title';
+                  titleEl.innerHTML = '<span>✦</span><span>' + customTitle + '</span>';
+                  bq.insertBefore(titleEl, firstP);
+                });
+
+                // 2. Renderiza fórmulas matemáticas KaTeX
+                if (window.renderMathInElement && doc.body) {
+                  try {
+                    window.renderMathInElement(doc.body, {
+                      delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                      ],
+                      throwOnError: false,
+                    });
+                  } catch (e) {
+                    console.error('KaTeX preview render error:', e);
+                  }
+                }
+              });
+            }, 250);
+          },
+          render: function () {
+            const entry = this.props.entry;
+            const title = entry.getIn(['data', 'title']) || '';
+            const description = entry.getIn(['data', 'description']) || '';
+            const heroImage = entry.getIn(['data', 'heroImage']);
+            const image = heroImage ? this.props.getAsset(heroImage) : null;
+
+            return h('div', { className: 'preview-container' },
+              h('div', { className: 'preview-header' },
+                h('div', { className: 'preview-badge' }, 'Delta Data (DMA/UFV) • Pré-visualização do Artigo'),
+                h('h1', { className: 'preview-title' }, title),
+                description ? h('p', { className: 'preview-desc' }, description) : null,
+                image ? h('img', { src: image.toString(), className: 'preview-hero', alt: 'Capa' }) : null
+              ),
+              h('div', { className: 'obsidian-prose' },
+                this.props.widgetFor('body')
+              )
+            );
+          },
+        });
+
+        CMS.registerPreviewTemplate('portfolio', PortfolioPreview);
+      }
+    </script>
   </body>
 </html>
-

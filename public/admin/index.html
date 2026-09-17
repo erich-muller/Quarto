@@ -4,29 +4,157 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel Editorial | Delta Data - UFV</title>
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="icon" type="image/png" href="../favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" />
     <link href="./config.yml" type="text/yaml" rel="cms-config-url" />
+
+    <!-- KaTeX para renderização de fórmulas matemáticas no preview -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Customização Visual do Painel Editorial Decap CMS -->
     <style>
       :root {
         --brand-dark: #02160E;
         --brand-light: #1FA05C;
-        --brand-white: #EAEAEA;
+        --brand-accent-hover: #26BD6E;
+        --brand-bg: #0B0F12;
+        --brand-surface: #141A1E;
+        --brand-border: #263036;
       }
+
       body {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Montserrat', system-ui, sans-serif !important;
+        background-color: #F9FAFB !important;
         margin: 0;
-        background-color: #F9FAFB;
       }
-      header {
+
+      header,
+      [class*="AppHeader"] {
+        background-color: var(--brand-bg) !important;
         border-bottom: 2px solid var(--brand-light) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+      }
+
+      button[class*="button-default"],
+      button[class*="Button"],
+      [class*="PublishButton"],
+      [class*="SaveButton"] {
+        background-color: var(--brand-light) !important;
+        color: #FFFFFF !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 600 !important;
+        border-radius: 6px !important;
+        border: none !important;
+        transition: all 0.2s ease !important;
+      }
+
+      button[class*="button-default"]:hover,
+      button[class*="Button"]:hover,
+      [class*="PublishButton"]:hover,
+      [class*="SaveButton"]:hover {
+        background-color: var(--brand-accent-hover) !important;
+        transform: translateY(-1px);
+      }
+
+      [class*="CardContainer"],
+      [class*="CollectionCard"] {
+        border-radius: 8px !important;
+        border: 1px solid #E5E7EB !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+      }
+
+      h1, h2, h3, h4, [class*="Heading"] {
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 700 !important;
       }
     </style>
   </head>
   <body>
     <!-- Decap CMS Oficial via CDN -->
     <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+
+    <script>
+      if (window.CMS) {
+        CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono&display=swap');
+        CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css');
+        CMS.registerPreviewStyle('./preview.css');
+
+        var PortfolioPreview = createClass({
+          componentDidMount: function () {
+            this.enhancePreview();
+          },
+          componentDidUpdate: function () {
+            this.enhancePreview();
+          },
+          enhancePreview: function () {
+            setTimeout(function () {
+              var iframes = document.querySelectorAll('iframe');
+              iframes.forEach(function (iframe) {
+                var doc = iframe.contentDocument || iframe.contentWindow?.document;
+                if (!doc) return;
+
+                doc.querySelectorAll('blockquote').forEach(function (bq) {
+                  if (bq.classList.contains('callout')) return;
+                  var firstP = bq.querySelector('p');
+                  if (!firstP) return;
+                  var firstChild = firstP.firstChild;
+                  if (!firstChild || firstChild.nodeType !== 3) return;
+                  var text = firstChild.textContent || '';
+                  var match = text.match(/^\[!([A-Za-z]+)\][ \t]*(.*?)(?:\r?\n|$)([\s\S]*)/);
+                  if (!match) return;
+
+                  var type = match[1].toLowerCase();
+                  var customTitle = match[2].trim() || type.toUpperCase();
+                  firstChild.textContent = match[3];
+                  bq.classList.add('callout', 'callout-' + type);
+
+                  var titleEl = doc.createElement('div');
+                  titleEl.className = 'callout-title';
+                  titleEl.innerHTML = '<span>✦</span><span>' + customTitle + '</span>';
+                  bq.insertBefore(titleEl, firstP);
+                });
+
+                if (window.renderMathInElement && doc.body) {
+                  try {
+                    window.renderMathInElement(doc.body, {
+                      delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                      ],
+                      throwOnError: false,
+                    });
+                  } catch (e) {}
+                }
+              });
+            }, 250);
+          },
+          render: function () {
+            var entry = this.props.entry;
+            var title = entry.getIn(['data', 'title']) || '';
+            var description = entry.getIn(['data', 'description']) || '';
+            var heroImage = entry.getIn(['data', 'heroImage']);
+            var image = heroImage ? this.props.getAsset(heroImage) : null;
+
+            return h('div', { className: 'preview-container' },
+              h('div', { className: 'preview-header' },
+                h('div', { className: 'preview-badge' }, 'Delta Data (DMA/UFV) • Pré-visualização do Artigo'),
+                h('h1', { className: 'preview-title' }, title),
+                description ? h('p', { className: 'preview-desc' }, description) : null,
+                image ? h('img', { src: image.toString(), className: 'preview-hero', alt: 'Capa' }) : null
+              ),
+              h('div', { className: 'obsidian-prose' },
+                this.props.widgetFor('body')
+              )
+            );
+          },
+        });
+
+        CMS.registerPreviewTemplate('portfolio', PortfolioPreview);
+      }
+    </script>
   </body>
 </html>
