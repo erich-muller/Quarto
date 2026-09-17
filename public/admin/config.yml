@@ -3,8 +3,8 @@ backend:
   repo: erich-muller/Quarto
   branch: main
   # Em produção com OAuth customizado:
-  # base_url: https://seu-oauth-gateway.com
-  # auth_endpoint: auth
+  base_url: https://quarto-decap-oauth.erichmdutra.workers.dev
+  auth_endpoint: auth
 
 # Habilita o backend local para desenvolvimento sem necessidade de push imediato
 # Executar no terminal: npx decap-server
