@@ -16,9 +16,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const readTime = calculateReadingTime(body || description);
 ---
 
-<article class="group relative flex flex-col bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-light dark:hover:border-brand-light hover:shadow-lg">
+<article class="group relative flex flex-col bg-white dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark rounded-lg overflow-hidden transition-all duration-200 hover:border-brand-light dark:hover:border-brand-light hover:shadow-md">
   {heroImage && (
-    <div class="relative w-full h-48 bg-brand-dark/10 dark:bg-brand-surface-dark-elevated overflow-hidden">
+    <div class="relative w-full h-48 bg-gray-100 dark:bg-brand-surface-dark-elevated overflow-hidden border-b border-brand-border-light dark:border-brand-border-dark">
       <img
         src={heroImage.startsWith('http') || heroImage.startsWith('/') ? heroImage : `${base}/${heroImage.replace(/^\//, '')}`}
         alt={`Capa do artigo: ${title}`}
@@ -31,16 +31,16 @@ const readTime = calculateReadingTime(body || description);
   <div class="flex-1 p-6 flex flex-col justify-between">
     <div>
       <!-- Metadados: Data e Tempo de Leitura -->
-      <div class="flex items-center gap-3 text-xs text-brand-muted-light dark:text-brand-muted-dark mb-3">
+      <div class="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400 mb-3 font-mono">
         <time datetime={publishDate.toISOString()}>
           {formatDate(publishDate)}
         </time>
-        <span class="inline-block w-1 h-1 rounded-full bg-brand-border-light dark:bg-brand-border-dark"></span>
+        <span class="inline-block w-1 h-1 rounded-full bg-gray-300 dark:bg-gray-600"></span>
         <span>{readTime} min de leitura</span>
       </div>
 
       <!-- Título -->
-      <h3 class="text-xl font-bold text-brand-dark dark:text-brand-white group-hover:text-brand-light transition-colors mb-2 line-clamp-2">
+      <h3 class="text-xl font-bold text-gray-900 dark:text-brand-white group-hover:text-brand-light transition-colors mb-2 line-clamp-2">
         <a href={`${base}/portfolio/${slug}`} class="focus:outline-none">
           <span class="absolute inset-0" aria-hidden="true"></span>
           {title}
@@ -48,7 +48,7 @@ const readTime = calculateReadingTime(body || description);
       </h3>
 
       <!-- Resumo -->
-      <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark line-clamp-3 mb-4 leading-relaxed">
+      <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-4 leading-relaxed font-normal">
         {description}
       </p>
     </div>
@@ -68,4 +68,3 @@ const readTime = calculateReadingTime(body || description);
     </div>
   </div>
 </article>
-

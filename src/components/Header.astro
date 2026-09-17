@@ -14,22 +14,22 @@ const navLinks = [
 const pathname = Astro.url.pathname.replace(/\/$/, '');
 ---
 
-<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-brand-bg-light/90 dark:bg-brand-dark/90 border-b border-brand-border-light dark:border-brand-border-dark transition-colors duration-200">
+<header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/90 dark:bg-brand-bg-dark/90 border-b border-brand-border-light dark:border-brand-border-dark transition-colors duration-200">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-20">
       <!-- Logotipo Oficial com alternância automática Claro / Escuro -->
-      <a href={`${base}/`} class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-light rounded-sm p-1" aria-label="Quarto Analytics - Página Inicial">
+      <a href={`${base}/`} class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-brand-light rounded-sm p-1" aria-label="Delta Data - Empresa Júnior de Matemática UFV">
         <!-- Logo Modo Claro (logotipo_v2: Verde + Escuro) -->
         <img
           src={`${base}/images/logo/logo-light.png`}
-          alt="Quarto Analytics"
+          alt="Delta Data - UFV"
           class="h-8 sm:h-10 w-auto block dark:hidden object-contain"
           loading="eager"
         />
         <!-- Logo Modo Escuro (logotipo_v1: Verde + Claro) -->
         <img
           src={`${base}/images/logo/logo-dark.png`}
-          alt="Quarto Analytics"
+          alt="Delta Data - UFV"
           class="h-8 sm:h-10 w-auto hidden dark:block object-contain"
           loading="eager"
         />
@@ -45,7 +45,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '');
               class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 isActive
                   ? 'text-brand-light font-semibold bg-brand-light/10'
-                  : 'text-brand-dark/80 dark:text-brand-white/80 hover:text-brand-light dark:hover:text-brand-light hover:bg-brand-light/5'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-brand-light dark:hover:text-brand-light hover:bg-black/5 dark:hover:bg-white/5'
               }`}
               aria-current={isActive ? 'page' : undefined}
             >
@@ -62,7 +62,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '');
           href={`${base}/contato`}
           class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-light active:scale-95"
         >
-          Falar com Especialista
+          Solicitar Diagnóstico
         </a>
       </div>
 
@@ -72,7 +72,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '');
         <button
           id="mobile-menu-btn"
           type="button"
-          class="p-2 rounded-md text-brand-dark dark:text-brand-white hover:bg-brand-light/10 focus:outline-none focus:ring-2 focus:ring-brand-light"
+          class="p-2 rounded-md text-gray-700 dark:text-brand-white hover:bg-black/5 dark:hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-brand-light"
           aria-expanded="false"
           aria-controls="mobile-menu"
           aria-label="Abrir menu de navegação"
@@ -86,7 +86,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '');
   </div>
 
   <!-- Menu Mobile -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark px-4 pt-2 pb-6 space-y-2">
+  <div id="mobile-menu" class="hidden md:hidden border-t border-brand-border-light dark:border-brand-border-dark bg-white dark:bg-brand-surface-dark px-4 pt-2 pb-6 space-y-2">
     {navLinks.map((link) => {
       const isActive = pathname === link.href || (link.href !== `${base}/` && pathname.startsWith(link.href));
       return (
@@ -95,7 +95,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '');
           class={`block px-3 py-2 rounded-md text-base font-medium ${
             isActive
               ? 'text-brand-light font-semibold bg-brand-light/10'
-              : 'text-brand-dark dark:text-brand-white hover:text-brand-light dark:hover:text-brand-light hover:bg-brand-light/5'
+              : 'text-gray-700 dark:text-gray-200 hover:text-brand-light dark:hover:text-brand-light hover:bg-black/5 dark:hover:bg-white/5'
           }`}
         >
           {link.label}
@@ -107,7 +107,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '');
         href={`${base}/contato`}
         class="block w-full text-center px-4 py-2.5 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-colors"
       >
-        Falar com Especialista
+        Solicitar Diagnóstico Gratuito
       </a>
     </div>
   </div>
@@ -119,14 +119,17 @@ const pathname = Astro.url.pathname.replace(/\/$/, '');
     const menu = document.getElementById('mobile-menu');
     if (!btn || !menu) return;
 
-    btn.addEventListener('click', () => {
+    btn.onclick = () => {
       const expanded = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(!expanded));
       menu.classList.toggle('hidden');
-    });
+    };
   }
 
-  setupMobileMenu();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMobileMenu);
+  } else {
+    setupMobileMenu();
+  }
   document.addEventListener('astro:after-swap', setupMobileMenu);
 </script>
-

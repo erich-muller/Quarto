@@ -2,12 +2,15 @@ backend:
   name: github
   repo: erich-muller/Quarto
   branch: main
-  # Se utilizar um servidor de autenticação próprio (ex: Cloudflare Worker ou Netlify), configure:
+  # Em produção com OAuth customizado:
   # base_url: https://seu-oauth-gateway.com
   # auth_endpoint: auth
 
 # Habilita o backend local para desenvolvimento sem necessidade de push imediato
-local_backend: true
+# Executar no terminal: npx decap-server
+local_backend:
+  url: "http://localhost:8081/api/v1"
+  allowed_hosts: ["localhost", "127.0.0.1"]
 
 # Configurações de mídia
 media_folder: "public/images/portfolio"
@@ -31,8 +34,7 @@ collections:
       - { label: "Data de Publicação", name: "publishDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Descrição Resumida", name: "description", widget: "text" }
       - { label: "Imagem de Capa", name: "heroImage", widget: "image", required: false }
-      - { label: "Tags", name: "tags", widget: "list", default: ["Analytics", "Consultoria"] }
+      - { label: "Tags", name: "tags", widget: "list", default: ["Analytics", "Ciência de Dados"] }
       - { label: "Destaque na Página Inicial?", name: "featured", widget: "boolean", default: false, required: false }
-      - { label: "Autor", name: "author", widget: "string", default: "Equipe Quarto" }
-      - { label: "Conteúdo Técnico", name: "body", widget: "markdown" }
-
+      - { label: "Autor", name: "author", widget: "string", default: "Equipe Delta Data" }
+      - { label: "Conteúdo Técnico (Markdown)", name: "body", widget: "markdown" }

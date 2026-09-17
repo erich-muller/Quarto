@@ -2,90 +2,108 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const faqs = [
+  {
+    question: 'Como uma Empresa Júnior emite notas e contratos?',
+    answer:
+      'A Delta Data opera sob a regulamentação oficial da Lei Federal nº 13.267/2016 (Lei da Empresa Júnior). Possuímos CNPJ próprio, conta bancária institucional e estamos plenamente habilitados para celebrar contratos formais de prestação de serviços e emitir Notas Fiscais Eletrônicas de Serviços (NFS-e) com total conformidade contábil e jurídica.',
+  },
+  {
+    question: 'A Delta Data atende apenas em Florestal ou remotamente?',
+    answer:
+      'Atendemos clientes em todo o território nacional. Nossas soluções de engenharia de dados, business intelligence, modelagem estatística e produção de materiais pedagógicos são desenvolvidas utilizando infraestrutura em nuvem, repositórios de código e reuniões periódicas por videoconferência, garantindo agilidade e proximidade sem barreiras geográficas.',
+  },
+  {
+    question: 'Quem garante a qualidade técnica dos projetos entregues?',
+    answer:
+      'Cada projeto passa por um ciclo duplo de garantia da qualidade: a revisão interna entre gerentes e diretores de projetos da Delta Data e a orientação consultiva direta de professores e pesquisadores doutores do Departamento de Matemática (DMA) da Universidade Federal de Viçosa (UFV), assegurando conformidade metodológica e ausência de erros teóricos.',
+  },
+];
 ---
 
 <BaseLayout
-  title="Contato & Diagnóstico Técnico"
-  description="Entre em contato com os especialistas da Quarto Analytics para discutir projetos de engenharia de dados, machine learning e consultoria analítica."
+  title="Contato & Diagnóstico Gratuito"
+  description="Entre em contato com a Delta Data, Empresa Júnior de Matemática da UFV, para agendar um diagnóstico gratuito ou solicitar uma proposta comercial."
 >
-  <section class="py-16 sm:py-20 border-b border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark">
+  <!-- Cabeçalho -->
+  <section class="py-16 sm:py-20 border-b border-brand-border-light dark:border-brand-border-dark bg-white dark:bg-brand-bg-dark">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-light/10 text-brand-light border border-brand-light/20 mb-4">
-        Canais Diretos
+        Briefing & Diagnóstico
       </div>
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight mb-4">
-        Vamos conversar sobre seus desafios de dados.
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-brand-white tracking-tight mb-4">
+        Vamos conversar sobre as suas demandas de dados e ensino.
       </h1>
-      <p class="text-lg text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-        Preencha o formulário abaixo ou envie um e-mail direto. Nossos líderes técnicos respondem em até 24 horas úteis com uma avaliação preliminar.
+      <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+        Preencha o formulário para agendar um diagnóstico técnico sem custos ou entre em contato diretamente pelos nossos canais institucionais.
       </p>
     </div>
   </section>
 
+  <!-- Área Principal: Informações & Formulário -->
   <section class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-      <!-- Informações e Canais Diretos -->
-      <div class="lg:col-span-1 space-y-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Coluna Lateral de Contato Direto -->
+      <div class="lg:col-span-4 space-y-6">
         <div>
           <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
-            Comunicação Direta
+            Atendimento Institucional
           </h2>
-          <h3 class="text-xl font-bold text-brand-dark dark:text-brand-white mb-4">
-            Canais Oficiais
+          <h3 class="text-xl font-bold text-gray-900 dark:text-brand-white mb-2">
+            Canais de Contato Direto
           </h3>
-          <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark leading-relaxed mb-6">
-            Preferimos conversas técnicas diretas sem intermediários comerciais ou abordagens genéricas.
+          <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+            Nossa equipe de consultores retornará o contato em até 24 horas úteis.
           </p>
         </div>
 
-        <div class="p-6 rounded-lg bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark space-y-4">
+        <div class="p-6 rounded-lg bg-white dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark space-y-4 shadow-sm">
           <div>
-            <div class="text-xs font-mono text-brand-muted-light dark:text-brand-muted-dark uppercase mb-1">E-mail Corporativo</div>
-            <a href="mailto:contato@quartoanalytics.com.br" class="text-sm font-semibold text-brand-light hover:underline break-all">
-              contato@quartoanalytics.com.br
+            <div class="text-xs font-mono text-gray-400 dark:text-gray-500 uppercase mb-1">E-mail Geral</div>
+            <a href="mailto:contato@deltadata.ufv.br" class="text-sm font-semibold text-brand-light hover:underline break-all">
+              contato@deltadata.ufv.br
             </a>
           </div>
 
           <div class="pt-4 border-t border-brand-border-light/60 dark:border-brand-border-dark/60">
-            <div class="text-xs font-mono text-brand-muted-light dark:text-brand-muted-dark uppercase mb-1">Repositório & Código</div>
-            <a href="https://github.com/erich-muller/Quarto" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-brand-light hover:underline flex items-center gap-1.5">
-              <span>github.com/erich-muller/Quarto</span>
-              <span class="text-xs">↗</span>
-            </a>
+            <div class="text-xs font-mono text-gray-400 dark:text-gray-500 uppercase mb-1">Telefone / WhatsApp Comercial</div>
+            <p class="text-sm font-medium text-gray-800 dark:text-gray-200">
+              (31) 99999-9999 <span class="text-xs text-gray-400">(Atendimento Comercial)</span>
+            </p>
           </div>
 
           <div class="pt-4 border-t border-brand-border-light/60 dark:border-brand-border-dark/60">
-            <div class="text-xs font-mono text-brand-muted-light dark:text-brand-muted-dark uppercase mb-1">Tempo de Resposta</div>
-            <p class="text-xs text-brand-dark dark:text-brand-white font-medium">
-              Até 1 dia útil para propostas e diagnósticos técnicos.
+            <div class="text-xs font-mono text-gray-400 dark:text-gray-500 uppercase mb-1">Localização Física</div>
+            <p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">
+              Prédio LEN02 (Sala 06) – Campus Universitário, Universidade Federal de Viçosa, Florestal – MG, CEP 35690-000
             </p>
           </div>
         </div>
 
-        <div class="p-6 rounded-lg bg-brand-light/5 border border-brand-border-light dark:border-brand-border-dark">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-brand-dark dark:text-brand-white mb-2">
-            Acordo de Confidencialidade (NDA)
-          </h4>
-          <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-            Caso seu projeto envolva dados sensíveis ou informações proprietárias de mercado, podemos assinar um acordo de confidencialidade mútuo antes do primeiro alinhamento.
+        <div class="p-6 rounded-lg bg-gray-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark">
+          <div class="text-xs font-mono font-bold text-brand-light mb-1">MOVIMENTO EMPRESA JÚNIOR</div>
+          <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+            Filiada à FEJEMG e Brasil Júnior. Compromisso social de reinvestir os recursos obtidos exclusivamente na capacitação dos membros e na infraestrutura educacional.
           </p>
         </div>
       </div>
 
-      <!-- Formulário de Contato -->
-      <div class="lg:col-span-2">
-        <div class="p-8 sm:p-10 rounded-xl bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark">
-          <h3 class="text-2xl font-bold text-brand-dark dark:text-brand-white mb-2">
-            Solicitar Proposta ou Diagnóstico
+      <!-- Coluna do Formulário Inteligente de Diagnóstico -->
+      <div class="lg:col-span-8">
+        <div class="p-8 sm:p-10 rounded-xl bg-white dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark shadow-sm">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-brand-white mb-2">
+            Formulário Inteligente de Diagnóstico
           </h3>
-          <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark mb-8">
-            Descreva brevemente sua infraestrutura atual e objetivos para que possamos direcionar o especialista correto.
+          <p class="text-sm text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+            Preencha os campos abaixo para que possamos conectar você ao consultor especialista mais adequado ao seu contexto.
           </p>
 
           <form id="contact-form" class="space-y-6" action="https://formspree.io/f/seu-id-aqui" method="POST">
+            <!-- Nome e E-mail -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-brand-dark dark:text-brand-white mb-2">
+                <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200 mb-2">
                   Nome Completo *
                 </label>
                 <input
@@ -93,86 +111,108 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                   id="name"
                   name="name"
                   required
-                  placeholder="Ex: Carlos Silva"
-                  class="w-full px-4 py-3 text-sm rounded-md bg-brand-bg-light dark:bg-brand-dark border border-brand-border-light dark:border-brand-border-dark text-brand-dark dark:text-brand-white placeholder-brand-muted-light dark:placeholder-brand-muted-dark focus:outline-none focus:ring-2 focus:ring-brand-light"
+                  placeholder="Ex: João Ferreira"
+                  class="w-full px-4 py-3 text-sm rounded-md bg-gray-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark text-gray-900 dark:text-brand-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-light"
                 />
               </div>
 
               <div>
-                <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-brand-dark dark:text-brand-white mb-2">
-                  E-mail Corporativo *
+                <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200 mb-2">
+                  E-mail Corporativo / Acadêmico *
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   required
-                  placeholder="carlos@empresa.com.br"
-                  class="w-full px-4 py-3 text-sm rounded-md bg-brand-bg-light dark:bg-brand-dark border border-brand-border-light dark:border-brand-border-dark text-brand-dark dark:text-brand-white placeholder-brand-muted-light dark:placeholder-brand-muted-dark focus:outline-none focus:ring-2 focus:ring-brand-light"
+                  placeholder="joao@organizacao.com.br"
+                  class="w-full px-4 py-3 text-sm rounded-md bg-gray-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark text-gray-900 dark:text-brand-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-light"
                 />
               </div>
             </div>
 
+            <!-- Telefone e Tipo de Organização -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label for="company" class="block text-xs font-semibold uppercase tracking-wider text-brand-dark dark:text-brand-white mb-2">
-                  Empresa / Organização
+                <label for="phone" class="block text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200 mb-2">
+                  Telefone / WhatsApp com DDD *
                 </label>
                 <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  placeholder="Ex: FinTech X"
-                  class="w-full px-4 py-3 text-sm rounded-md bg-brand-bg-light dark:bg-brand-dark border border-brand-border-light dark:border-brand-border-dark text-brand-dark dark:text-brand-white placeholder-brand-muted-light dark:placeholder-brand-muted-dark focus:outline-none focus:ring-2 focus:ring-brand-light"
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  placeholder="(31) 98765-4321"
+                  class="w-full px-4 py-3 text-sm rounded-md bg-gray-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark text-gray-900 dark:text-brand-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-light"
                 />
               </div>
 
               <div>
-                <label for="solution" class="block text-xs font-semibold uppercase tracking-wider text-brand-dark dark:text-brand-white mb-2">
-                  Área de Interesse
+                <label for="orgType" class="block text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200 mb-2">
+                  Tipo de Organização *
                 </label>
                 <select
-                  id="solution"
-                  name="solution"
-                  class="w-full px-4 py-3 text-sm rounded-md bg-brand-bg-light dark:bg-brand-dark border border-brand-border-light dark:border-brand-border-dark text-brand-dark dark:text-brand-white focus:outline-none focus:ring-2 focus:ring-brand-light"
+                  id="orgType"
+                  name="orgType"
+                  required
+                  class="w-full px-4 py-3 text-sm rounded-md bg-gray-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark text-gray-900 dark:text-brand-white focus:outline-none focus:ring-2 focus:ring-brand-light"
                 >
-                  <option value="Engenharia de Dados">Engenharia de Dados & Lakehouse</option>
-                  <option value="Business Intelligence">Business Intelligence & Métricas</option>
-                  <option value="Machine Learning">Machine Learning & Ciência de Dados</option>
-                  <option value="Governança e Custos">Governança, FinOps & Qualidade de Dados</option>
-                  <option value="Diagnóstico Geral">Diagnóstico Geral de Maturidade</option>
+                  <option value="Empresa / Varejo">Empresa / Varejo</option>
+                  <option value="Indústria">Indústria</option>
+                  <option value="Escola / Instituição de Ensino">Escola / Instituição de Ensino</option>
+                  <option value="Outro">Outro</option>
                 </select>
               </div>
             </div>
 
+            <!-- Área de Interesse Principal -->
             <div>
-              <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-brand-dark dark:text-brand-white mb-2">
-                Descrição do Desafio ou Projeto *
+              <label for="interestArea" class="block text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200 mb-2">
+                Área de Interesse Principal *
+              </label>
+              <select
+                id="interestArea"
+                name="interestArea"
+                required
+                class="w-full px-4 py-3 text-sm rounded-md bg-gray-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark text-gray-900 dark:text-brand-white focus:outline-none focus:ring-2 focus:ring-brand-light"
+              >
+                <option value="Estruturação e Coleta de Dados">Estruturação e Coleta de Dados</option>
+                <option value="Criação de Dashboards (Gestão à Vista)">Criação de Dashboards (Gestão à Vista)</option>
+                <option value="Modelagem Matemática / Previsões / Otimização">Modelagem Matemática / Previsões / Otimização</option>
+                <option value="Recursos Pedagógicos e Materiais de Matemática">Recursos Pedagógicos e Materiais de Matemática</option>
+                <option value="Outro / Preciso de Orientação">Outro / Preciso de Orientação</option>
+              </select>
+            </div>
+
+            <!-- Descrição do Gargalo ou Objetivo -->
+            <div>
+              <label for="bottleneck" class="block text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200 mb-2">
+                Descreva brevemente o principal gargalo ou objetivo da sua organização *
               </label>
               <textarea
-                id="message"
-                name="message"
-                rows="5"
+                id="bottleneck"
+                name="bottleneck"
+                rows="4"
                 required
-                placeholder="Conte sobre suas fontes de dados atuais, volume, tecnologias utilizadas ou gargalos analíticos..."
-                class="w-full px-4 py-3 text-sm rounded-md bg-brand-bg-light dark:bg-brand-dark border border-brand-border-light dark:border-brand-border-dark text-brand-dark dark:text-brand-white placeholder-brand-muted-light dark:placeholder-brand-muted-dark focus:outline-none focus:ring-2 focus:ring-brand-light"
+                placeholder="Ex: Temos dados espalhados em três planilhas que não batem; ou: Gostaríamos de implantar um projeto investigativo de matemática na nossa escola..."
+                class="w-full px-4 py-3 text-sm rounded-md bg-gray-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark text-gray-900 dark:text-brand-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-light"
               ></textarea>
             </div>
 
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
               <button
                 type="submit"
-                class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-brand-light active:scale-95"
+                class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-light active:scale-95"
               >
-                Enviar Solicitação
+                Solicitar Contato de Consultor
               </button>
 
               <button
-                id="mailto-fallback-btn"
+                id="mailto-direct-btn"
                 type="button"
-                class="text-xs text-brand-muted-light dark:text-brand-muted-dark hover:text-brand-light dark:hover:text-brand-light underline font-mono"
+                class="text-xs text-gray-500 dark:text-gray-400 hover:text-brand-light dark:hover:text-brand-light underline font-mono"
               >
-                Prefere enviar pelo seu cliente de e-mail? Clique aqui
+                Prefere enviar via e-mail direto? Clique aqui
               </button>
             </div>
           </form>
@@ -181,40 +221,78 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </div>
   </section>
 
-  <!-- Script para preenchimento de parâmetros de URL e fallback mailto -->
+  <!-- Seção de Dúvidas Frequentes (FAQ) -->
+  <section class="py-16 bg-gray-50 dark:bg-brand-surface-dark border-t border-brand-border-light dark:border-brand-border-dark">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
+          Transparência & Processos
+        </h2>
+        <p class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-brand-white tracking-tight">
+          Perguntas Frequentes (FAQ)
+        </p>
+      </div>
+
+      <div class="space-y-6">
+        {faqs.map((faq) => (
+          <div class="p-6 rounded-lg bg-white dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark">
+            <h3 class="text-base font-bold text-gray-900 dark:text-brand-white mb-2 flex items-start gap-2">
+              <span class="text-brand-light font-bold text-lg leading-none">?</span>
+              <span>{faq.question}</span>
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed pl-5">
+              {faq.answer}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Script para pré-seleção via URL e mailto fallback -->
   <script is:inline>
     function setupContactForm() {
       const urlParams = new URLSearchParams(window.location.search);
-      const solucaoParam = urlParams.get('solucao');
-      const selectElement = document.getElementById('solution');
+      const interesseParam = urlParams.get('interesse');
+      const selectElement = document.getElementById('interestArea');
 
-      if (solucaoParam && selectElement) {
+      if (interesseParam && selectElement) {
         for (let i = 0; i < selectElement.options.length; i++) {
-          if (selectElement.options[i].text.toLowerCase().includes(solucaoParam.toLowerCase())) {
+          if (
+            selectElement.options[i].text.toLowerCase().includes(interesseParam.toLowerCase()) ||
+            interesseParam.toLowerCase().includes(selectElement.options[i].value.toLowerCase())
+          ) {
             selectElement.selectedIndex = i;
             break;
           }
         }
       }
 
-      const mailtoBtn = document.getElementById('mailto-fallback-btn');
+      const mailtoBtn = document.getElementById('mailto-direct-btn');
       if (mailtoBtn) {
-        mailtoBtn.addEventListener('click', () => {
+        mailtoBtn.onclick = () => {
           const name = document.getElementById('name')?.value || '';
-          const company = document.getElementById('company')?.value || '';
-          const solution = document.getElementById('solution')?.value || '';
-          const message = document.getElementById('message')?.value || '';
+          const email = document.getElementById('email')?.value || '';
+          const phone = document.getElementById('phone')?.value || '';
+          const orgType = document.getElementById('orgType')?.value || '';
+          const interest = document.getElementById('interestArea')?.value || '';
+          const bottleneck = document.getElementById('bottleneck')?.value || '';
 
-          const subject = encodeURIComponent(`Contato Quarto Analytics - ${company || name || 'Interesse em Consultoria'}`);
-          const body = encodeURIComponent(`Olá equipe Quarto Analytics,\n\nNome: ${name}\nEmpresa: ${company}\nÁrea de Interesse: ${solution}\n\nMensagem:\n${message}`);
+          const subject = encodeURIComponent(`Solicitação de Contato Delta Data - ${orgType || name}`);
+          const body = encodeURIComponent(
+            `Olá equipe Delta Data,\n\nNome: ${name}\nE-mail: ${email}\nTelefone: ${phone}\nTipo de Organização: ${orgType}\nÁrea de Interesse: ${interest}\n\nDescrição da Demanda:\n${bottleneck}`
+          );
 
-          window.location.href = `mailto:contato@quartoanalytics.com.br?subject=${subject}&body=${body}`;
-        });
+          window.location.href = `mailto:contato@deltadata.ufv.br?subject=${subject}&body=${body}`;
+        };
       }
     }
 
-    setupContactForm();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupContactForm);
+    } else {
+      setupContactForm();
+    }
     document.addEventListener('astro:after-swap', setupContactForm);
   </script>
 </BaseLayout>
-

@@ -1,8 +1,8 @@
 {
-  "name": "quarto-analytics",
+  "name": "delta-data-ufv",
   "type": "module",
   "version": "1.0.0",
-  "description": "Site institucional e portfólio de consultoria e análise de dados",
+  "description": "Delta Data — Empresa Júnior de Matemática da Universidade Federal de Viçosa (DMA/UFV)",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -23,4 +23,3 @@
     "@types/node": "^20.17.24"
   }
 }
-

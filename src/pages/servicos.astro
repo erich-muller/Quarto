@@ -5,128 +5,168 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const services = [
   {
-    id: 'engenharia',
-    title: 'Engenharia de Plataformas de Dados & Lakehouse',
-    badge: 'Infraestrutura & Pipelines',
-    desc: 'Arquitetamos plataformas analíticas elásticas, resilientes e abertas. Eliminamos silos de dados com pipelines de ingestão contínua em formato Apache Iceberg, orquestração robusta e controle rigoroso de esquemas.',
+    id: 'coleta',
+    title: 'Sistema de Coleta e Estruturação de Dados',
+    category: 'Engenharia de Dados',
+    objective: 'Transformar operações manuais, descentralizadas ou inexistentes em arquiteturas organizadas prontas para análise.',
+    salesScenario: 'Empresas com processos manuais em papel ou mensagens, planilhas dispersas, retrabalho frequente de digitação ou ausência de um histórico digital confiável.',
     deliverables: [
-      'Ingestão contínua em streaming (Kafka/Pulsar) e batch eficiente',
-      'Camadas Medallion (Bronze, Silver, Gold) com isolamento ACID',
-      'Orquestração declarativa e modular com dbt e Airflow / Dagster',
-      'Testes automatizados de consistência, unicidade e não-nulidade',
+      'Modelagem de bancos de dados relacionais (PostgreSQL, MySQL) e não-relacionais otimizados para consulta',
+      'Pipelines automatizados de extração, tratamento e carga (ETL/ELT) em Python e SQL',
+      'Formulários integrados e regras de validação de consistência para eliminar erros humanos na entrada de dados',
+      'Documentação técnica da arquitetura e dicionário de dados da organização',
     ],
-    techs: ['Apache Iceberg', 'dbt', 'DuckDB', 'Trino', 'PostgreSQL', 'Snowflake', 'BigQuery'],
+    techs: ['Python', 'SQL', 'PostgreSQL', 'DuckDB', 'APIs REST', 'Google Sheets Automation'],
   },
   {
-    id: 'bi',
-    title: 'Business Intelligence & Camada Semântica Unificada',
-    badge: 'Métricas & Visualização',
-    desc: 'Construímos a "única fonte da verdade" para a sua diretoria. Padronizamos definições de KPIs, reduzimos discordâncias entre áreas de negócio e entregamos painéis de alta fidelidade visual e tempo de resposta instantâneo.',
+    id: 'gestao-a-vista',
+    title: 'Gestão à Vista (Visualização e Análise Descritiva)',
+    category: 'Business Intelligence',
+    objective: 'Converter registros operacionais em ferramentas de inteligência visual e operacional de leitura imediata.',
+    salesScenario: 'Organizações que acumulam grandes volumes de dados (ERP, CRM, planilhas), mas não conseguem extrair conclusões acionáveis ou identificar tendências em tempo hábil.',
     deliverables: [
-      'Definição de dicionário de métricas e governança de catálogo',
-      'Modelagem dimensional (Kimball / Star Schema) de alta performance',
-      'Dashboards executivos e operacionais orientados à tomada de ação',
-      'Redução drástica no tempo de carregamento de relatórios analíticos',
+      'Dashboards interativos e responsivos (Power BI, Streamlit ou Looker Studio) com filtros dinâmicos de faturamento, estoque, retenção ou produção',
+      'Relatórios aprofundados de Análise Exploratória de Dados (EDA) identificando sazonalidades, gargalos e anomalias estatísticas',
+      'Indicadores-chave de desempenho (KPIs) desenhados sob medida para a liderança e equipe operacional',
+      'Treinamento e capacitação dos usuários internos para interpretação dos painéis',
     ],
-    techs: ['Power BI', 'Metabase', 'Tableau', 'Cube.js', 'Looker Studio', 'SQL Avançado'],
+    techs: ['Power BI', 'Streamlit', 'Looker Studio', 'Metabase', 'Pandas', 'Seaborn'],
   },
   {
-    id: 'ml',
-    title: 'Machine Learning & Ciência de Dados Aplicada',
-    badge: 'Modelos Preditivos',
-    desc: 'Desenvolvemos motores estatísticos e algoritmos supervisionados que antecipam comportamentos futuros, otimizam alocação de capital e reduzem perdas operacionais com foco estrito em explicabilidade e validação empírica.',
+    id: 'modelagem',
+    title: 'Relatório de BI e Modelagem (Predição, Otimização e Prescrição)',
+    category: 'Matemática Aplicada & ML',
+    objective: 'Aplicar modelos estatísticos e matemáticos avançados para prever comportamentos e otimizar rotinas complexas.',
+    salesScenario: 'Empresas que precisam prever demanda de produtos, otimizar rotas logísticas, precificar dinamicamente ou projetar cenários de fluxo de caixa sob incerteza.',
     deliverables: [
-      'Modelagem de Churn e Propensão de Compra com XGBoost / LightGBM',
-      'Motores de Precificação Dinâmica e Otimização Não-Linear de Margem',
-      'Previsão de Demanda em Séries Temporais com Intervalos de Confiança',
-      'Explicabilidade individualizada via SHAP e análise causal',
+      'Relatório Técnico Executivo (PDF): Formulação matemática formal do problema, premissas adotadas, limitações do modelo, métricas de validação empírica e recomendações de negócio',
+      'Transparência Total (White-Box): Repositório com todo o código-fonte utilizado (Python/R/SQL), documentado linha a linha, sem dependência de plataformas proprietárias fechadas',
+      'Scripts e simuladores de cenários com análise de sensibilidade paramétrica',
+      'Acompanhamento e validação dos resultados com a orientação de docentes doutores do DMA/UFV',
     ],
-    techs: ['Python', 'XGBoost', 'scikit-learn', 'SHAP', 'SciPy', 'PyTorch', 'MLflow'],
+    techs: ['Python', 'R', 'scikit-learn', 'SciPy', 'XGBoost', 'Statsmodels', 'Pesquisa Operacional'],
   },
   {
-    id: 'governanca',
-    title: 'Governança de Dados, Qualidade & FinOps Analítico',
-    badge: 'Eficiência & Conformidade',
-    desc: 'Auditoria de integridade dos dados e controle financeiro das faturas de cloud computing. Eliminamos consultas ineficientes, organizamos permissões de acesso (LGPD/GDPR) e reduzimos custos de armazenamento e processamento.',
+    id: 'pedagogico',
+    title: 'Recursos Educacionais em Matemática (Apoio Pedagógico)',
+    category: 'Educação Matemática',
+    objective: 'Inovar práticas de ensino-aprendizagem alinhando rigor formal, contextualização e diretrizes curriculares nacionais.',
+    salesScenario: 'Escolas públicas e privadas, cursos preparatórios, pré-vestibulares e secretarias de educação que buscam superar a defasagem no aprendizado matemático ou modernizar seu currículo.',
     deliverables: [
-      'Auditoria de custos de processamento (FinOps em BigQuery/Snowflake/AWS)',
-      'Detecção automatizada de anomalias e quebra de contratos de dados',
-      'Adequação de linhagem de dados e políticas de privacidade e retenção',
-      'Documentação técnica automatizada de fácil manutenção',
+      'Sequências didáticas completas e planos de aula estruturados por competências e habilidades da BNCC',
+      'Listas de exercícios modulares e contextualizadas, gabaritadas com resolução analítica comentada passo a passo',
+      'Roteiros práticos para laboratórios de matemática, feiras de ciências e atividades investigativas',
+      'Jogos matemáticos autorais, dinâmicas lúdicas de raciocínio lógico e relatórios de validação metodológica',
     ],
-    techs: ['OpenMetadata', 'Great Expectations', 'dbt tests', 'SQLFluff', 'AWS Cost Explorer'],
+    techs: ['BNCC', 'GeoGebra', 'LaTeX / TikZ', 'Metodologias Ativas', 'Laboratórios Investigativos'],
   },
 ];
 ---
 
 <BaseLayout
-  title="Serviços de Consultoria em Análise e Engenharia de Dados"
-  description="Conheça nossas soluções completas em Engenharia de Dados, Business Intelligence, Machine Learning e Governança Analítica."
+  title="Serviços — Soluções de Dados e Educação Matemática"
+  description="Conheça os serviços da Delta Data: Coleta e Estruturação de Dados, Gestão à Vista, Modelagem Matemática e Recursos Educacionais para escolas."
 >
-  <!-- Cabeçalho da Página -->
-  <section class="py-16 sm:py-20 border-b border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark">
+  <!-- Cabeçalho de Serviços -->
+  <section class="py-16 sm:py-20 border-b border-brand-border-light dark:border-brand-border-dark bg-white dark:bg-brand-bg-dark">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-light/10 text-brand-light border border-brand-light/20 mb-4">
-        Soluções Corporativas
+        Soluções & Consultoria
       </div>
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight mb-6">
-        Soluções sob medida para o ciclo completo dos dados.
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-brand-white tracking-tight mb-6">
+        Nossas Soluções Especializadas
       </h1>
-      <p class="text-lg text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-        Do desenho da arquitetura de ingestão à entrega de algoritmos preditivos em produção, atuamos como uma extensão estratégica da sua equipe técnica.
+      <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+        Estruturamos a esteira de serviços da Delta Data com foco estrito em três fatores: o problema real do cliente, a solidez da abordagem matemática e o entregável concreto com código documentado e acompanhamento acadêmico.
       </p>
     </div>
   </section>
 
-  <!-- Lista Detalhada de Serviços -->
+  <!-- Lista de Serviços Detalhada -->
   <section class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="space-y-16">
       {services.map((srv, index) => (
-        <div id={srv.id} class="p-8 sm:p-10 rounded-xl bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark hover:border-brand-light dark:hover:border-brand-light transition-all">
+        <div
+          id={srv.id}
+          class="p-8 sm:p-10 rounded-xl bg-white dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark hover:border-brand-light dark:hover:border-brand-light transition-all scroll-mt-24 shadow-sm"
+        >
           <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
             <div class="flex-1">
-              <span class="inline-block px-3 py-1 text-xs font-mono font-semibold uppercase tracking-wider text-brand-light bg-brand-light/10 rounded mb-4">
-                {srv.badge}
-              </span>
-              <h2 class="text-2xl sm:text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight mb-4">
+              <!-- Categoria & Número -->
+              <div class="flex items-center gap-3 mb-4">
+                <span class="px-2.5 py-0.5 text-xs font-mono font-bold uppercase text-brand-light bg-brand-light/10 rounded">
+                  {srv.category}
+                </span>
+                <span class="text-xs font-mono text-gray-400 dark:text-gray-500">
+                  Módulo 0{index + 1}
+                </span>
+              </div>
+
+              <!-- Título -->
+              <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-brand-white tracking-tight mb-4">
                 {srv.title}
               </h2>
-              <p class="text-base text-brand-muted-light dark:text-brand-muted-dark leading-relaxed mb-6">
-                {srv.desc}
-              </p>
 
-              <!-- Entregáveis -->
-              <h3 class="text-xs font-semibold uppercase tracking-wider text-brand-dark dark:text-brand-white mb-3">
-                Principais Entregáveis:
-              </h3>
-              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-brand-dark/80 dark:text-brand-white/80 mb-6">
-                {srv.deliverables.map((item) => (
-                  <li class="flex items-start gap-2">
-                    <span class="text-brand-light font-bold mt-0.5">✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <!-- Objetivo -->
+              <div class="p-4 rounded-lg bg-gray-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark mb-6">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-light block mb-1">Objetivo Central:</span>
+                <p class="text-sm font-medium text-gray-800 dark:text-gray-200 leading-relaxed">
+                  {srv.objective}
+                </p>
+              </div>
 
-              <!-- Tecnologias -->
+              <!-- Cenário de Venda / Para quem é indicado -->
+              <div class="mb-6">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
+                  Cenário de Aplicação:
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {srv.salesScenario}
+                </p>
+              </div>
+
+              <!-- Entregáveis Concretos -->
+              <div class="mb-6">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-900 dark:text-brand-white mb-3">
+                  Entregáveis Concretos:
+                </h3>
+                <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                  {srv.deliverables.map((item) => (
+                    <li class="flex items-start gap-2.5">
+                      <span class="text-brand-light font-bold mt-0.5">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Tecnologias e Ferramentas -->
               <div class="flex flex-wrap items-center gap-2 pt-4 border-t border-brand-border-light/60 dark:border-brand-border-dark/60">
-                <span class="text-xs font-mono text-brand-muted-light dark:text-brand-muted-dark mr-1">Stack:</span>
+                <span class="text-xs font-mono text-gray-400 dark:text-gray-500 mr-1">Tecnologias:</span>
                 {srv.techs.map((tech) => (
-                  <span class="px-2 py-0.5 text-xs font-mono rounded bg-brand-light/5 text-brand-dark dark:text-brand-white border border-brand-border-light dark:border-brand-border-dark">
+                  <span class="px-2 py-0.5 text-xs font-mono rounded bg-gray-100 dark:bg-brand-bg-dark text-gray-700 dark:text-gray-300 border border-brand-border-light dark:border-brand-border-dark">
                     {tech}
                   </span>
                 ))}
               </div>
             </div>
 
-            <!-- Botão de Diagnóstico Específico -->
+            <!-- Coluna de Ação Lateral -->
             <div class="lg:w-64 flex flex-col justify-start">
-              <a
-                href={`${base}/contato?solucao=${encodeURIComponent(srv.title)}`}
-                class="w-full text-center px-5 py-3 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-light"
-              >
-                Solicitar Proposta
-              </a>
+              <div class="p-6 rounded-lg bg-gray-50 dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark space-y-4">
+                <div>
+                  <div class="text-xs font-mono text-brand-light font-bold">MODELO JÚNIOR</div>
+                  <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    Supervisão de professores doutores do DMA/UFV
+                  </div>
+                </div>
+                <a
+                  href={`${base}/contato?interesse=${encodeURIComponent(srv.title)}`}
+                  class="block w-full text-center px-4 py-3 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-light active:scale-95"
+                >
+                  Solicitar Diagnóstico
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -134,22 +174,21 @@ const services = [
     </div>
   </section>
 
-  <!-- Seção CTA -->
-  <section class="py-16 bg-brand-surface-dark-elevated border-t border-brand-border-dark text-white">
+  <!-- Banner de Conversão Final -->
+  <section class="py-16 bg-white dark:bg-brand-surface-dark border-t border-brand-border-light dark:border-brand-border-dark">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-extrabold tracking-tight mb-4 text-brand-white">
-        Dúvidas sobre qual solução melhor atende ao seu momento atual?
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-brand-white tracking-tight mb-4">
+        Não tem certeza de qual solução é a mais indicada para o seu cenário?
       </h2>
-      <p class="text-base text-brand-muted-dark max-w-2xl mx-auto mb-8 leading-relaxed">
-        Realizamos uma sessão de diagnóstico preliminar sem compromisso para entender a maturidade analítica da sua empresa e propor o roteiro técnico mais custo-eficiente.
+      <p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+        Realizamos uma reunião de briefing gratuita para entender a maturidade dos seus dados ou a demanda pedagógica da sua instituição e recomendar o melhor caminho.
       </p>
       <a
         href={`${base}/contato`}
-        class="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-md transition-colors"
+        class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-md transition-colors"
       >
-        Agendar Diagnóstico Gratuito
+        Agendar Diagnóstico Gratuito com a Delta Data
       </a>
     </div>
   </section>
 </BaseLayout>
-

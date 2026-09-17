@@ -5,157 +5,325 @@ import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-// Busca artigos em destaque ou os mais recentes
+// Artigos do portfólio
 const allArticles = await getCollection('portfolio');
 const sortedArticles = allArticles.sort(
   (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
-const featuredArticles = sortedArticles.filter((a) => a.data.featured).slice(0, 3);
-const displayArticles = featuredArticles.length > 0 ? featuredArticles : sortedArticles.slice(0, 3);
+const displayArticles = sortedArticles.slice(0, 3);
 
-const services = [
+const quickServices = [
   {
+    anchor: `${base}/servicos#coleta`,
+    title: 'Sistemas de Coleta',
+    desc: 'Estruturação e automação de bases de dados.',
+    detail: 'Transformação de rotinas manuais e planilhas dispersas em bancos de dados consolidados e pipelines confiáveis.',
     icon: 'M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7zm0 4h16M4 15h16',
-    title: 'Engenharia de Dados & Lakehouse',
-    description: 'Pipelines modernos de ingestão em streaming e batch, modelagem dimensional robusta, Apache Iceberg e infraestrutura de alta confiabilidade.',
   },
   {
+    anchor: `${base}/servicos#gestao-a-vista`,
+    title: 'Gestão à Vista',
+    desc: 'Dashboards interativos e inteligência visual.',
+    detail: 'Painéis dinâmicos e intuitivos (Power BI, Streamlit) com indicadores claros para acompanhamento operacional em tempo real.',
     icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-    title: 'Business Intelligence & Decisão Executiva',
-    description: 'Dashboards analíticos de alta densidade informacional, métricas padronizadas e camada semântica única para alinhamento entre diretoria e operações.',
   },
   {
+    anchor: `${base}/servicos#modelagem`,
+    title: 'Modelagem e BI Avançado',
+    desc: 'Predição e otimização em código aberto (white-box).',
+    detail: 'Algoritmos estatísticos e de machine learning documentados linha a linha, sem fórmulas secretas ou caixas-pretas.',
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-    title: 'Machine Learning & Ciência de Dados',
-    description: 'Modelagem preditiva (churn, fraude, LTV, precificação dinâmica) com ênfase em interpretabilidade estatística, validação contínua e valor econômico real.',
   },
   {
-    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-    title: 'Governança de Dados & FinOps Analítico',
-    description: 'Auditoria de integridade, linhagem de dados, catálogos automatizados e otimização de custos de computação em nuvem (Snowflake, BigQuery, AWS).',
+    anchor: `${base}/servicos#pedagogico`,
+    title: 'Soluções Pedagógicas',
+    desc: 'Materiais didáticos inovadores alinhados à BNCC.',
+    detail: 'Sequências de aulas, laboratórios práticos, listas comentadas e oficinas para modernizar o ensino de matemática básica.',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
   },
 ];
 
-const metrics = [
-  { value: '+R$ 45M', label: 'Valor Econômico Gerado para Clientes' },
-  { value: 'sub-10min', label: 'Latência Máxima de Atualização Analítica' },
-  { value: '99.95%', label: 'Confiabilidade em Testes de Integridade' },
-  { value: '100%', label: 'Código Auditável e Soberania do Cliente' },
+const differentials = [
+  {
+    title: 'Precisão Matemática',
+    badge: 'Rigor Teórico',
+    desc: 'Soluções sustentadas por teoria estatística e álgebra linear robustas, evitando correlações espúrias e conclusões enviesadas.',
+  },
+  {
+    title: 'Abordagem White-Box',
+    badge: 'Transparência Total',
+    desc: 'Fim das "caixas-pretas". O cliente recebe relatórios técnicos completos, premissas matemáticas e o código-fonte documentado.',
+  },
+  {
+    title: 'Custo-Benefício Júnior',
+    badge: 'Impacto Social',
+    desc: 'Valores altamente acessíveis com orientação direta de docentes e pesquisadores doutores do Departamento de Matemática da UFV.',
+  },
+];
+
+const authorityItems = [
+  {
+    tag: 'DMA / UFV',
+    title: 'Departamento de Matemática',
+    desc: 'Orientação e suporte acadêmico de professores doutores da Universidade Federal de Viçosa.',
+  },
+  {
+    tag: 'MEJ / FEJEMG',
+    title: 'Movimento Empresa Júnior',
+    desc: 'Filiada à FEJEMG e Brasil Júnior, com gestão profissional e foco em impacto de mercado.',
+  },
+  {
+    tag: 'Lei nº 13.267/2016',
+    title: 'Segurança Jurídica',
+    desc: 'Empresa constituída com CNPJ próprio, emissão regular de notas fiscais e contratos transparentes.',
+  },
+  {
+    tag: '100% White-Box',
+    title: 'Código Aberto',
+    desc: 'Soberania analítica do cliente. Sem fidelidade forçada ou dependência de softwares fechados.',
+  },
 ];
 ---
 
 <BaseLayout
-  title="Consultoria Estratégica em Análise e Engenharia de Dados"
-  description="A Quarto Analytics estrutura ecossistemas modernos de dados, modelos de machine learning e plataformas analíticas para decisões corporativas de alta precisão."
+  title="Inteligência Analítica com Rigor Matemático"
+  description="Delta Data — Empresa Júnior do curso de Matemática da UFV. Soluções em engenharia de dados, BI, modelagem preditiva e inovação pedagógica."
 >
-  <!-- Hero Section Minimalista e Sólido -->
-  <section class="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 border-b border-brand-border-light dark:border-brand-border-dark">
+  <!-- Hero Section (Dobra Principal) -->
+  <section class="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-brand-border-light dark:border-brand-border-dark bg-white dark:bg-brand-bg-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
-        <!-- Tagline Superior -->
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-light/10 text-brand-light border border-brand-light/20 mb-6">
-          <span class="w-2 h-2 rounded-full bg-brand-light animate-pulse"></span>
-          Consultoria de Dados & Analytics Avançado
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Coluna de Texto Principal -->
+        <div class="lg:col-span-7">
+          <!-- Tagline Institucional -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-light/10 text-brand-light border border-brand-light/20 mb-6">
+            <span class="w-2 h-2 rounded-full bg-brand-light animate-pulse"></span>
+            Empresa Júnior de Matemática • DMA / UFV
+          </div>
+
+          <!-- Título de Impacto Exato -->
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-brand-white tracking-tight leading-[1.18] mb-6">
+            Do dado bruto à decisão exata: <span class="text-brand-light">inteligência analítica com rigor matemático</span>.
+          </h1>
+
+          <!-- Subtítulo Oficial -->
+          <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8 max-w-2xl font-normal">
+            Empresa Júnior do curso de Matemática da Universidade Federal de Viçosa. Desenvolvemos soluções em engenharia de dados, business intelligence, modelagem preditiva e inovação pedagógica.
+          </p>
+
+          <!-- CTAs Primários -->
+          <div class="flex flex-wrap items-center gap-4">
+            <a
+              href={`${base}/contato`}
+              class="inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-light active:scale-95"
+            >
+              Solicitar Diagnóstico Gratuito
+            </a>
+            <a
+              href={`${base}/servicos`}
+              class="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-brand-surface-dark hover:bg-gray-100 dark:hover:bg-brand-surface-dark-elevated border border-brand-border-light dark:border-brand-border-dark rounded-md transition-colors"
+            >
+              Conhecer Nossos Serviços →
+            </a>
+          </div>
         </div>
 
-        <!-- Título Principal com Autoridade -->
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight leading-[1.15] mb-6">
-          Transformamos dados complexos em <span class="text-brand-light">decisões de alto impacto</span>.
-        </h1>
+        <!-- Elemento Visual: Gráfico Vetorial Interativo de Grafos de Dados e Equações -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-md p-6 rounded-xl bg-gray-50 dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark shadow-sm">
+            <div class="flex items-center justify-between border-b border-brand-border-light dark:border-brand-border-dark pb-3 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-400"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span class="w-3 h-3 rounded-full bg-green-400"></span>
+              </div>
+              <span class="text-xs font-mono text-gray-500 dark:text-gray-400">delta_analysis.py</span>
+            </div>
 
-        <!-- Proposta de Valor -->
-        <p class="text-lg sm:text-xl text-brand-muted-light dark:text-brand-muted-dark leading-relaxed mb-8">
-          Apoiamos organizações na construção de plataformas de dados modernas, modelagem preditiva estatística e arquitetura analítica robusta. Sem modismos, com código aberto e foco estrito no resultado financeiro.
-        </p>
+            <!-- Visualização Interativa SVG de Nós de Dados -->
+            <svg viewBox="0 0 400 260" class="w-full h-auto text-brand-light" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Conexões do Grafo -->
+              <line x1="50" y1="60" x2="160" y2="100" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" stroke-opacity="0.5" />
+              <line x1="50" y1="180" x2="160" y2="100" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4" stroke-opacity="0.5" />
+              <line x1="160" y1="100" x2="260" y2="60" stroke="currentColor" stroke-width="2" stroke-opacity="0.7" />
+              <line x1="160" y1="100" x2="260" y2="160" stroke="currentColor" stroke-width="2.5" stroke-opacity="0.9" />
+              <line x1="260" y1="60" x2="350" y2="110" stroke="currentColor" stroke-width="2" stroke-opacity="0.8" />
+              <line x1="260" y1="160" x2="350" y2="110" stroke="currentColor" stroke-width="2" stroke-opacity="0.8" />
 
-        <!-- Botões de Ação Direta -->
-        <div class="flex flex-wrap items-center gap-4">
-          <a
-            href={`${base}/contato`}
-            class="inline-flex items-center justify-center px-6 py-3.5 text-base font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-light active:scale-95"
-          >
-            Agendar Diagnóstico Técnico
-          </a>
-          <a
-            href={`${base}/portfolio`}
-            class="inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-brand-dark dark:text-brand-white bg-brand-surface-light dark:bg-brand-surface-dark hover:border-brand-light border border-brand-border-light dark:border-brand-border-dark rounded-md transition-colors"
-          >
-            Explorar Estudos de Caso →
-          </a>
+              <!-- Nó 1: Dados Brutos (Entrada) -->
+              <circle cx="50" cy="60" r="22" fill="#141A1E" stroke="currentColor" stroke-width="2" />
+              <text x="50" y="64" font-size="10" font-family="monospace" fill="#EAEAEA" text-anchor="middle">CSV/SQL</text>
+
+              <!-- Nó 2: Planilhas e Escolas -->
+              <circle cx="50" cy="180" r="22" fill="#141A1E" stroke="currentColor" stroke-width="2" />
+              <text x="50" y="184" font-size="10" font-family="monospace" fill="#EAEAEA" text-anchor="middle">BNCC</text>
+
+              <!-- Nó Central: Núcleo Matemático Delta -->
+              <rect x="125" y="75" width="70" height="50" rx="8" fill="#1FA05C" fill-opacity="0.15" stroke="currentColor" stroke-width="2" />
+              <text x="160" y="96" font-size="14" font-weight="bold" font-family="monospace" fill="currentColor" text-anchor="middle">Δ Data</text>
+              <text x="160" y="112" font-size="9" font-family="monospace" fill="#9CA3AF" text-anchor="middle">Rigor UFV</text>
+
+              <!-- Nó 3: Modelagem Preditiva -->
+              <circle cx="260" cy="60" r="24" fill="#141A1E" stroke="currentColor" stroke-width="2" />
+              <text x="260" y="64" font-size="11" font-family="monospace" fill="#1FA05C" text-anchor="middle">ŷ = f(X)</text>
+
+              <!-- Nó 4: Gestão à Vista / BI -->
+              <circle cx="260" cy="160" r="24" fill="#141A1E" stroke="currentColor" stroke-width="2" />
+              <text x="260" y="164" font-size="10" font-family="monospace" fill="#EAEAEA" text-anchor="middle">Dashboards</text>
+
+              <!-- Nó 5: Decisão Exata / Impacto -->
+              <circle cx="350" cy="110" r="26" fill="#1FA05C" stroke="#EAEAEA" stroke-width="2" />
+              <text x="350" y="114" font-size="10" font-weight="bold" font-family="monospace" fill="#FFFFFF" text-anchor="middle">ROI / BNCC</text>
+            </svg>
+
+            <!-- Rodapé da visualização -->
+            <div class="mt-4 pt-3 border-t border-brand-border-light dark:border-brand-border-dark flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+              <span class="font-mono">Metodologia White-Box</span>
+              <span class="text-brand-light font-semibold">100% Auditável</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Métricas e Indicadores de Impacto -->
-  <section class="py-12 bg-brand-surface-light dark:bg-brand-surface-dark border-b border-brand-border-light dark:border-brand-border-dark">
+  <!-- Números e Credibilidade (Faixa de Autoridade) -->
+  <section class="py-12 bg-gray-50 dark:bg-brand-surface-dark border-b border-brand-border-light dark:border-brand-border-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-        {metrics.map((item) => (
-          <div class="border-l-2 border-brand-light pl-4">
-            <div class="text-2xl sm:text-3xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight font-mono">
-              {item.value}
-            </div>
-            <div class="text-xs sm:text-sm text-brand-muted-light dark:text-brand-muted-dark mt-1 leading-snug">
-              {item.label}
-            </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {authorityItems.map((item) => (
+          <div class="p-5 rounded-lg bg-white dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark">
+            <span class="inline-block px-2.5 py-0.5 text-xs font-mono font-bold text-brand-light bg-brand-light/10 rounded mb-2">
+              {item.tag}
+            </span>
+            <h3 class="text-base font-bold text-gray-900 dark:text-brand-white mb-1">
+              {item.title}
+            </h3>
+            <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+              {item.desc}
+            </p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Resumo dos Serviços de Consultoria -->
-  <section class="py-20 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Visão Geral dos Serviços (Cards de Acesso Rápido) -->
+  <section class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
       <div>
         <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
-          Capacidades Analíticas
+          Áreas de Atuação
         </h2>
-        <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
-          Soluções de Consultoria de Ponta a Ponta
+        <p class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-brand-white tracking-tight">
+          Nossas Soluções Especializadas
+        </p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+          Quatro frentes modulares para resolver gargalos operacionais e pedagógicos.
         </p>
       </div>
       <a
         href={`${base}/servicos`}
         class="mt-4 md:mt-0 text-sm font-semibold text-brand-light hover:underline flex items-center gap-1"
       >
-        Ver detalhamento de serviços →
+        Ver catálogo completo de serviços →
       </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {services.map((srv) => (
-        <div class="p-8 rounded-lg bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark hover:border-brand-light dark:hover:border-brand-light transition-all">
-          <div class="w-12 h-12 rounded-md bg-brand-light/10 text-brand-light flex items-center justify-center mb-6">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={srv.icon} />
-            </svg>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {quickServices.map((srv, idx) => (
+        <a
+          href={srv.anchor}
+          class="group p-6 rounded-lg bg-white dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark hover:border-brand-light dark:hover:border-brand-light transition-all flex flex-col justify-between hover:shadow-md"
+        >
+          <div>
+            <div class="w-10 h-10 rounded-md bg-brand-light/10 text-brand-light flex items-center justify-center mb-4 group-hover:bg-brand-light group-hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={srv.icon} />
+              </svg>
+            </div>
+            <span class="text-xs font-mono font-bold text-gray-400 dark:text-gray-500 mb-1 block">0{idx + 1}.</span>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-brand-white mb-2 group-hover:text-brand-light transition-colors">
+              {srv.title}
+            </h3>
+            <p class="text-xs font-semibold text-brand-light mb-2">
+              {srv.desc}
+            </p>
+            <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+              {srv.detail}
+            </p>
           </div>
-          <h3 class="text-xl font-bold text-brand-dark dark:text-brand-white mb-3">
-            {srv.title}
-          </h3>
-          <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-            {srv.description}
-          </p>
-        </div>
+          <div class="mt-4 pt-4 border-t border-brand-border-light/60 dark:border-brand-border-dark/60 text-xs font-semibold text-brand-light flex items-center gap-1">
+            Saiba mais →
+          </div>
+        </a>
       ))}
     </div>
   </section>
 
+  <!-- Diferenciais Competitivos -->
+  <section class="py-16 bg-gray-50 dark:bg-brand-surface-dark border-t border-b border-brand-border-light dark:border-brand-border-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
+          Por que a Delta Data?
+        </h2>
+        <p class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-brand-white tracking-tight">
+          Diferenciais Competitivos
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {differentials.map((diff) => (
+          <div class="p-8 rounded-lg bg-white dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark">
+            <span class="inline-block px-2.5 py-0.5 text-xs font-mono font-semibold uppercase text-brand-light bg-brand-light/10 rounded mb-3">
+              {diff.badge}
+            </span>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-brand-white mb-3">
+              {diff.title}
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+              {diff.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Chamada para Ação Intermediária (Banner de Conversão) -->
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="p-8 sm:p-12 rounded-xl bg-white dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-brand-white tracking-tight mb-3">
+          Tem dados dispersos em planilhas ou busca transformar o ensino na sua escola?
+        </h2>
+        <p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+          Agende uma conversa sem custo com nossos consultores. Analisamos seu contexto e desenhamos uma proposta sob medida com orientação acadêmica do DMA/UFV.
+        </p>
+      </div>
+      <a
+        href={`${base}/contato`}
+        class="inline-flex items-center justify-center px-6 py-3.5 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-light whitespace-nowrap"
+      >
+        Agendar Conversa Gratuita
+      </a>
+    </div>
+  </section>
+
   <!-- Destaques do Portfólio & Artigos Técnicos -->
-  <section class="py-20 bg-brand-surface-light dark:bg-brand-surface-dark border-t border-b border-brand-border-light dark:border-brand-border-dark">
+  <section class="py-16 bg-gray-50 dark:bg-brand-surface-dark border-t border-brand-border-light dark:border-brand-border-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
         <div>
           <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
-            Pesquisa & Prática
+            Acervo Técnico
           </h2>
-          <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
-            Artigos Técnicos e Estudos de Caso
+          <p class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-brand-white tracking-tight">
+            Artigos Técnicos e Estudos Aplicados
           </p>
-          <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark mt-2">
-            Metodologias abertas com formulações matemáticas, código reproduzível e resultados empíricos.
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            Publicações no estilo Quartz com fórmulas matemáticas, código documentado e métricas empíricas.
           </p>
         </div>
         <a
@@ -166,7 +334,7 @@ const metrics = [
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {displayArticles.map((article) => (
           <ProjectCard
             title={article.data.title}
@@ -181,69 +349,4 @@ const metrics = [
       </div>
     </div>
   </section>
-
-  <!-- Metodologia Sintética -->
-  <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="max-w-3xl mb-12">
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
-        Como Trabalhamos
-      </h2>
-      <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
-        Rigor Científico com Velocidade Operacional
-      </p>
-      <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark mt-2 leading-relaxed">
-        Não entregamos apenas relatórios estáticos. Construímos sistemas analíticos duradouros que passam a pertencer à sua equipe.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="p-6 rounded-md bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark">
-        <div class="text-xs font-mono font-bold text-brand-light mb-2">01. IMERSÃO</div>
-        <h3 class="text-base font-bold text-brand-dark dark:text-brand-white mb-2">Mapeamento de Gargalos</h3>
-        <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-          Auditoria da topologia atual de dados, fontes de atrito e identificação de alavancas de retorno sobre investimento.
-        </p>
-      </div>
-      <div class="p-6 rounded-md bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark">
-        <div class="text-xs font-mono font-bold text-brand-light mb-2">02. ENGENHARIA</div>
-        <h3 class="text-base font-bold text-brand-dark dark:text-brand-white mb-2">Modelagem & Pipelines</h3>
-        <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-          Estruturação de tabelas transacionais, deduplicação idempotente e linhagem automatizada com testes de dados.
-        </p>
-      </div>
-      <div class="p-6 rounded-md bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark">
-        <div class="text-xs font-mono font-bold text-brand-light mb-2">03. INTELIGÊNCIA</div>
-        <h3 class="text-base font-bold text-brand-dark dark:text-brand-white mb-2">Algoritmos & Decisão</h3>
-        <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-          Treinamento de modelos preditivos calibrados, análise quantitativa e painéis executivos de alto contraste.
-        </p>
-      </div>
-      <div class="p-6 rounded-md bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark">
-        <div class="text-xs font-mono font-bold text-brand-light mb-2">04. AUTONOMIA</div>
-        <h3 class="text-base font-bold text-brand-dark dark:text-brand-white mb-2">Transferência & Cultura</h3>
-        <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-          Documentação técnica no estilo Quartz, capacitação dos times internos e sustentação dos ativos analíticos.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Chamada Final para Contato -->
-  <section class="py-16 bg-brand-surface-dark-elevated border-t border-brand-border-dark text-white">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 text-brand-white">
-        Pronto para elevar o padrão analítico da sua organização?
-      </h2>
-      <p class="text-base sm:text-lg text-brand-muted-dark max-w-2xl mx-auto mb-8 leading-relaxed">
-        Converse diretamente com nossos consultores técnicos e receba uma avaliação preliminar da viabilidade do seu projeto de dados.
-      </p>
-      <a
-        href={`${base}/contato`}
-        class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-brand-light"
-      >
-        Solicitar Contato Especializado
-      </a>
-    </div>
-  </section>
 </BaseLayout>
-

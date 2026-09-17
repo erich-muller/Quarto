@@ -12,17 +12,20 @@ export default {
           accent: '#1FA05C',
           'accent-hover': '#26BD6E',
           'accent-dark': '#157B45',
-          // Superfícies tema escuro
-          'surface-dark': '#052418',
-          'surface-dark-elevated': '#0A3323',
-          'border-dark': '#134B34',
-          'muted-dark': '#8BA698',
-          // Superfícies tema claro
-          'bg-light': '#F7FAF8',
+          
+          // Superfícies e fundos neutros para Tema Escuro (sem saturação excessiva de verde)
+          'bg-dark': '#0B0F12',
+          'surface-dark': '#141A1E',
+          'surface-dark-elevated': '#1B2227',
+          'border-dark': '#263036',
+          'muted-dark': '#9CA3AF',
+          
+          // Superfícies e fundos neutros para Tema Claro
+          'bg-light': '#F9FAFB',
           'surface-light': '#FFFFFF',
-          'surface-light-elevated': '#EAEAEA',
-          'border-light': '#D1DDD6',
-          'muted-light': '#4A6256',
+          'surface-light-elevated': '#F3F4F6',
+          'border-light': '#E5E7EB',
+          'muted-light': '#4B5563',
         },
       },
       fontFamily: {
@@ -94,4 +97,3 @@ export default {
     require('@tailwindcss/typography'),
   ],
 };
-

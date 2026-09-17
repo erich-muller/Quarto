@@ -12,7 +12,7 @@ interface Props {
 
 const {
   title,
-  description = 'Consultoria especializada em engenharia de dados, inteligência analítica e machine learning.',
+  description = 'Delta Data - Empresa Júnior de Matemática da UFV. Do dado bruto à decisão exata: inteligência analítica com rigor matemático.',
   image = '/Quarto/images/logo/logo-dark.png',
   articleDate,
 } = Astro.props;
@@ -22,7 +22,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR">
   <head>
     <!-- Metadados Essenciais -->
     <meta charset="UTF-8" />
@@ -31,21 +31,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO & Metadados -->
-    <title>{title} | Quarto Analytics</title>
+    <title>{title} | Delta Data - UFV</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={articleDate ? 'article' : 'website'} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={`${title} | Quarto Analytics`} />
+    <meta property="og:title" content={`${title} | Delta Data - UFV`} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.site || canonicalURL)} />
 
     <!-- Twitter Card -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={`${title} | Quarto Analytics`} />
+    <meta property="twitter:title" content={`${title} | Delta Data - UFV`} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.site || canonicalURL)} />
 
@@ -73,15 +73,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           document.documentElement.classList.remove('dark');
         } else if (storedTheme === 'dark') {
           document.documentElement.classList.add('dark');
-        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-          document.documentElement.classList.remove('dark');
-        } else {
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
           document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
         }
       })();
     </script>
   </head>
-  <body class="bg-brand-bg-light dark:bg-brand-dark text-brand-dark dark:text-brand-white min-h-screen flex flex-col antialiased selection:bg-brand-light selection:text-white transition-colors duration-200">
+  <body class="bg-brand-bg-light dark:bg-brand-bg-dark text-gray-900 dark:text-brand-white min-h-screen flex flex-col antialiased selection:bg-brand-light selection:text-white transition-colors duration-200">
     <Header />
     <main class="flex-1 w-full">
       <slot />
@@ -89,4 +89,3 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <Footer />
   </body>
 </html>
-

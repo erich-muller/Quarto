@@ -3,168 +3,230 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const principles = [
+const values = [
   {
-    title: 'Rigor Estatístico e Empirismo',
-    desc: 'Não tomamos decisões por intuição. Cada modelo, métrica e pipeline é respaldado por hipóteses testáveis, validação cruzada rigorosa e análise de sensibilidade.',
+    title: 'Rigor Lógico & Matemático',
+    desc: 'Buscamos a exatidão. Modelos e análises estruturados com fundamentação teórica consistente, sem atalhos simplistas.',
   },
   {
-    title: 'Código Aberto e Soberania do Cliente',
-    desc: 'Sem soluções proprietárias aprisionantes (sem vendor lock-in). Entregamos repositórios limpos, versionados e com infraestrutura como código que pertencem 100% à sua empresa.',
+    title: 'Transparência Irrestrita (White-Box)',
+    desc: 'O cliente tem acesso total ao código-fonte, às formulações matemáticas e às limitações estatísticas das soluções entregues.',
   },
   {
-    title: 'Explicabilidade Acima da Caixa-Preta',
-    desc: 'Modelos de inteligência artificial precisam ser compreendidos pelos tomadores de decisão. Priorizamos formulações interpretáveis com decomposição Shapley e análise causal.',
+    title: 'Compromisso Social com a Educação',
+    desc: 'Acreditamos no poder transformador da matemática. Criamos materiais pedagógicos para superar déficits de aprendizagem.',
   },
   {
-    title: 'Engenharia de Produção Desde o Dia 1',
-    desc: 'Projetos analíticos que não chegam à produção não geram valor. Todo o desenvolvimento já contempla testes de dados, observabilidade, CI/CD e governança de custos.',
+    title: 'Ética no Tratamento de Dados',
+    desc: 'Respeito irrestrito à privacidade, confidencialidade, conformidade com a LGPD e governança segura dos dados dos clientes.',
   },
 ];
 
-const methodologySteps = [
+const teamMembers = [
   {
-    step: '01',
-    title: 'Diagnóstico & Descoberta de Valor',
-    desc: 'Mapeamos o fluxo de ponta a ponta dos dados na organização, identificamos duplicidades, gargalos operacionais e calculamos o ROI potencial das iniciativas prioritárias.',
+    name: 'Álvaro Alves Machado',
+    role: 'Diretor-Presidente',
+    course: 'Bacharelado em Matemática - UFV',
+    email: 'alvaro.a.machado@ufv.br',
+    badge: 'Gestão Estratégica',
   },
   {
-    step: '02',
-    title: 'Fundação de Engenharia & Qualidade',
-    desc: 'Implementação de contratos de dados, pipelines idempotentes (batch ou streaming), camadas Bronze-Silver-Gold e testes de integridade automáticos via dbt.',
+    name: 'Mateus Oliveira Santos',
+    role: 'Diretor Administrativo-Financeira',
+    course: 'Licenciatura em Matemática - UFV',
+    email: 'mateus.o.santos@ufv.br',
+    badge: 'Controle e Crescimento',
   },
   {
-    step: '03',
-    title: 'Modelagem Preditiva & Inteligência',
-    desc: 'Desenvolvimento e calibração de modelos estatísticos ou aprendizado de máquina com separação temporal rigorosa e explicabilidade de fatores determinantes.',
+    name: 'Yago Campos Venâncio',
+    role: 'Diretor de Negócios',
+    course: 'Licenciatura em Matemática - UFV',
+    email: 'yago.venancio@ufv.br',
+    badge: 'Expansão e Parcerias',
   },
   {
-    step: '04',
-    title: 'Ativação Analítica & Treinamento',
-    desc: 'Conexão com ferramentas de consumo executivo (BI, APIs, alertas operacionais), documentação estilo Quartz e capacitação dos times internos para autonomia completa.',
+    name: 'João Pedro Reis da Cruz',
+    role: 'Diretor de Projetos',
+    course: 'Licenciatura em Matemática - UFV',
+    email: 'joao.r.cruz@ufv.br',
+    badge: 'Execução e Inovação',
+  },
+  {
+    name: 'João Pedro Gontijo de Oliveira',
+    role: 'Diretor de Gestão de Pessoas',
+    course: 'Licenciatura em Matemática - UFV',
+    email: 'joao.gontijo.oliveira@ufv.br',
+    badge: 'Desenvolvimento Humano',
+  },
+  {
+    name: 'Letícia Daniela Pinto Leandro',
+    role: 'Diretora de Marketing',
+    course: 'Licenciatura em Matemática - UFV',
+    email: 'leticia.leandro@ufv.br',
+    badge: 'Comunicação Eficiente',
   },
 ];
 ---
 
 <BaseLayout
-  title="Sobre Nós & Metodologia de Trabalho"
-  description="Conheça a Quarto Analytics, nossa metodologia de engenharia e ciência de dados e nossos compromissos com rigor técnico e soberania do cliente."
+  title="Sobre Nós — História, Propósito e Equipe"
+  description="Conheça a história da Delta Data, Empresa Júnior do curso de Matemática da UFV, nosso apoio docente e nossa equipe."
 >
   <!-- Cabeçalho Institucional -->
-  <section class="py-16 sm:py-20 border-b border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark">
+  <section class="py-16 sm:py-20 border-b border-brand-border-light dark:border-brand-border-dark bg-white dark:bg-brand-bg-dark">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-brand-light/10 text-brand-light border border-brand-light/20 mb-4">
-        Institucional
+        Institucional • UFV
       </div>
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight mb-6">
-        Engenharia e inteligência analítica para problemas de alta complexidade.
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-brand-white tracking-tight mb-6">
+        A união do rigor acadêmico com a energia do Movimento Empresa Júnior.
       </h1>
-      <p class="text-lg text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-        A Quarto Analytics nasceu da convicção de que empresas líderes precisam de parceiros técnicos que combinem profundidade matemática com excelência em engenharia de software para transformar dados brutos em vantagem competitiva perene.
+      <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+        A Delta Data é a Empresa Júnior dos cursos de Bacharelado e Licenciatura em Matemática da Universidade Federal de Viçosa (UFV). Nascemos com a convicção de que a matemática aplicada é o alicerce indispensável tanto para decisões corporativas inteligentes quanto para a transformação da educação básica brasileira.
       </p>
     </div>
   </section>
 
-  <!-- Manifesto & Apresentação -->
-  <section class="py-16 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="space-y-6 text-base sm:text-lg text-brand-dark/90 dark:text-brand-white/90 leading-relaxed font-normal">
-      <h2 class="text-2xl sm:text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
-        Quem Somos
+  <!-- História e Propósito -->
+  <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="space-y-6 text-base sm:text-lg text-gray-700 dark:text-gray-200 leading-relaxed font-normal">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-brand-white tracking-tight">
+        Nossa História e Propósito
       </h2>
       <p>
-        Somos uma consultoria técnica boutique focada em três pilares integrados: <strong>Engenharia de Plataformas de Dados</strong>, <strong>Modelagem Estatística & Machine Learning</strong> e <strong>Business Intelligence Executivo</strong>.
+        Criada dentro do <strong>Departamento de Matemática (DMA) da Universidade Federal de Viçosa</strong>, a Delta Data reúne estudantes de graduação que unem a densidade teórica da universidade pública ao dinamismo do mercado.
       </p>
       <p>
-        Em um mercado saturado de promessas superficiais de "transformação digital", posicionamo-nos como engenheiros e cientistas pragmáticos. Desenvolvemos soluções com arquiteturas modernas (Apache Iceberg, DuckDB, Trino, dbt, Python, XGBoost) que reduzem despesas com infraestrutura em nuvem enquanto multiplicam a precisão decisória.
+        Percebemos dois grandes vazios no ecossistema atual: por um lado, empresas que acumulam montanhas de dados mas tomam decisões com base em palpites ou ferramentas proprietárias de "caixa-preta"; por outro lado, escolas e educadores que enfrentam o desafio crônico de ensinar matemática de maneira contextualizada e cativante.
+      </p>
+      <p>
+        A <strong>Delta Data</strong> foi fundada para responder a esses dois desafios com a mesma ferramenta: o raciocínio matemático rigoroso, transformado em código aberto para empresas e em metodologias ativas para escolas.
       </p>
     </div>
   </section>
 
-  <!-- Princípios Inegociáveis -->
-  <section class="py-16 bg-brand-surface-light dark:bg-brand-surface-dark border-t border-b border-brand-border-light dark:border-brand-border-dark">
+  <!-- Missão, Visão e Valores -->
+  <section class="py-16 bg-gray-50 dark:bg-brand-surface-dark border-t border-b border-brand-border-light dark:border-brand-border-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <!-- Missão -->
+        <div class="p-8 rounded-lg bg-white dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark">
+          <span class="text-xs font-mono font-bold text-brand-light uppercase tracking-wider block mb-2">Nossa Missão</span>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-brand-white mb-3">
+            Clareza Estratégica & Impacto Pedagógico
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+            Entregar clareza estratégica através da ciência de dados e transformar a experiência do aprendizado matemático com soluções didáticas de excelência.
+          </p>
+        </div>
+
+        <!-- Visão -->
+        <div class="p-8 rounded-lg bg-white dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark">
+          <span class="text-xs font-mono font-bold text-brand-light uppercase tracking-wider block mb-2">Nossa Visão</span>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-brand-white mb-3">
+            Referência Mineira e Nacional
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+            Ser referência mineira e nacional entre empresas juniores de ciências exatas em transparência analítica e impacto educacional.
+          </p>
+        </div>
+      </div>
+
+      <!-- Valores -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-6">
+          Nossos Valores Fundamentais
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {values.map((val) => (
+            <div class="p-6 rounded-lg bg-white dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark">
+              <h4 class="text-base font-bold text-gray-900 dark:text-brand-white mb-2 flex items-center gap-2">
+                <span class="text-brand-light">✓</span>
+                {val.title}
+              </h4>
+              <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                {val.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apoio Docente e Conexão UFV -->
+  <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="p-8 rounded-xl bg-brand-light/5 border border-brand-border-light dark:border-brand-border-dark">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 rounded-lg bg-brand-light text-white flex items-center justify-center font-bold text-xl flex-shrink-0">
+          UFV
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-brand-white mb-2">
+            Apoio Docente e Conexão com o DMA / UFV
+          </h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
+            Diferente de consultorias juniores genéricas, a Delta Data conta com o acompanhamento consultivo e mentoria de professores e pesquisadores doutores do Departamento de Matemática (DMA) da Universidade Federal de Viçosa.
+          </p>
+          <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+            Cada formulação algorítmica, teste de hipótese e sequência pedagógica passa por revisão interna fundamentada nos mais elevados padrões da pesquisa científica da UFV, garantindo que o cliente receba uma solução sólida e metodologicamente impecável.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nossa Equipe -->
+  <section class="py-16 bg-gray-50 dark:bg-brand-surface-dark border-t border-brand-border-light dark:border-brand-border-dark">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mb-12">
         <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
-          Nossa Filosofia
+          Pessoas & Liderança
         </h2>
-        <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
-          Princípios Inegociáveis de Engenharia
+        <p class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-brand-white tracking-tight">
+          Nossa Equipe
+        </p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+          Estudantes de graduação dos cursos de Bacharelado e Licenciatura em Matemática da UFV dedicados a gerar impacto real.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {principles.map((p) => (
-          <div class="p-8 rounded-lg border border-brand-border-light dark:border-brand-border-dark bg-brand-bg-light dark:bg-brand-dark">
-            <h3 class="text-lg font-bold text-brand-dark dark:text-brand-white mb-3 flex items-center gap-2">
-              <span class="text-brand-light">✓</span>
-              {p.title}
-            </h3>
-            <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-              {p.desc}
-            </p>
+      <!-- Grade de Membros -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {teamMembers.map((member) => (
+          <div class="p-6 rounded-lg bg-white dark:bg-brand-bg-dark border border-brand-border-light dark:border-brand-border-dark flex flex-col justify-between hover:border-brand-light transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark flex items-center justify-center font-bold text-brand-light text-base">
+                  {member.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}
+                </div>
+                <span class="text-xs font-mono px-2 py-0.5 rounded bg-brand-light/10 text-brand-light font-semibold">
+                  {member.badge}
+                </span>
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 dark:text-brand-white">
+                {member.name}
+              </h3>
+              <p class="text-xs font-semibold text-brand-light mb-1">
+                {member.role}
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">
+                {member.course}
+              </p>
+            </div>
+
+            <div class="pt-3 border-t border-brand-border-light/60 dark:border-brand-border-dark/60">
+              <a
+                href={`mailto:${member.email}`}
+                class="text-xs font-mono text-gray-600 dark:text-gray-400 hover:text-brand-light dark:hover:text-brand-light truncate block"
+                title={member.email}
+              >
+                ✉ {member.email}
+              </a>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
-
-  <!-- Metodologia de Trabalho Detalhada -->
-  <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="max-w-3xl mb-16">
-      <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-light mb-2">
-        Processo Estruturado
-      </h2>
-      <p class="text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight">
-        O Ciclo Analítico da Quarto Analytics
-      </p>
-      <p class="text-sm text-brand-muted-light dark:text-brand-muted-dark mt-2 leading-relaxed">
-        Uma adaptação moderna do framework CRISP-DM focada em entregas contínuas, validação precoce e zero retrabalho.
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {methodologySteps.map((m) => (
-        <div class="relative p-6 rounded-lg bg-brand-surface-light dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark flex flex-col justify-between">
-          <div>
-            <div class="text-3xl font-black text-brand-light/30 font-mono mb-4">
-              {m.step}
-            </div>
-            <h3 class="text-lg font-bold text-brand-dark dark:text-brand-white mb-3">
-              {m.title}
-            </h3>
-            <p class="text-xs text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
-              {m.desc}
-            </p>
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Credenciais da Equipe -->
-  <section class="py-16 bg-brand-surface-light dark:bg-brand-surface-dark border-t border-brand-border-light dark:border-brand-border-dark">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-2xl sm:text-3xl font-bold text-brand-dark dark:text-brand-white tracking-tight mb-4">
-        Liderança Técnica com Experiência Comprovada
-      </h2>
-      <p class="text-sm sm:text-base text-brand-muted-light dark:text-brand-muted-dark leading-relaxed mb-8">
-        Nossos consultores possuem sólida formação em Ciência da Computação, Estatística e Economia Aplicada, tendo liderado projetos de escala crítica em empresas de tecnologia, instituições financeiras e indústrias de ponta.
-      </p>
-      <div class="inline-flex flex-wrap justify-center gap-4">
-        <a
-          href={`${base}/portfolio`}
-          class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md transition-all shadow-sm"
-        >
-          Examinar Nossos Estudos de Caso
-        </a>
-        <a
-          href={`${base}/contato`}
-          class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-brand-dark dark:text-brand-white border border-brand-border-light dark:border-brand-border-dark hover:border-brand-light rounded-md transition-colors"
-        >
-          Conversar com Nossa Equipe
-        </a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
-

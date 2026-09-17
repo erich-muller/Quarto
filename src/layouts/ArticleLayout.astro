@@ -23,7 +23,7 @@ const {
   publishDate,
   heroImage,
   tags = [],
-  author = 'Equipe Quarto',
+  author = 'Equipe Delta Data',
   headings = [],
   rawContent = '',
 } = Astro.props;
@@ -34,12 +34,12 @@ const readTime = calculateReadingTime(rawContent || description);
 
 <BaseLayout title={title} description={description} image={heroImage} articleDate={publishDate}>
   <!-- Barra de Cabeçalho do Artigo -->
-  <header class="border-b border-brand-border-light dark:border-brand-border-dark bg-brand-surface-light dark:bg-brand-surface-dark py-10 sm:py-14">
+  <header class="border-b border-brand-border-light dark:border-brand-border-dark bg-white dark:bg-brand-bg-dark py-10 sm:py-14">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Navegação de Retorno -->
       <a
         href={`${base}/portfolio`}
-        class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-brand-light hover:underline mb-6"
+        class="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wider text-brand-light hover:underline mb-6 font-mono"
       >
         ← Voltar ao Portfólio & Artigos
       </a>
@@ -54,28 +54,28 @@ const readTime = calculateReadingTime(rawContent || description);
       </div>
 
       <!-- Título Principal -->
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark dark:text-brand-white tracking-tight leading-tight mb-4">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-brand-white tracking-tight leading-tight mb-4">
         {title}
       </h1>
 
       <!-- Resumo Executivo -->
-      <p class="text-lg sm:text-xl text-brand-muted-light dark:text-brand-muted-dark leading-relaxed mb-6 font-normal">
+      <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-6 font-normal">
         {description}
       </p>
 
       <!-- Metadados de Autoria e Publicação -->
-      <div class="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-brand-muted-light dark:text-brand-muted-dark pt-4 border-t border-brand-border-light/60 dark:border-brand-border-dark/60">
+      <div class="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400 pt-4 border-t border-brand-border-light/60 dark:border-brand-border-dark/60 font-mono">
         <div class="flex items-center gap-2">
           <span class="w-7 h-7 rounded-full bg-brand-light text-white font-bold flex items-center justify-center text-xs">
             {author.charAt(0)}
           </span>
-          <span class="font-medium text-brand-dark dark:text-brand-white">{author}</span>
+          <span class="font-medium text-gray-800 dark:text-gray-200">{author}</span>
         </div>
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-border-light dark:bg-brand-border-dark"></span>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></span>
         <time datetime={publishDate.toISOString()}>
           {formatDate(publishDate)}
         </time>
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-border-light dark:bg-brand-border-dark"></span>
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-gray-300 dark:bg-gray-600"></span>
         <span class="flex items-center gap-1">
           <svg class="w-4 h-4 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -89,7 +89,7 @@ const readTime = calculateReadingTime(rawContent || description);
   <!-- Imagem de Capa Opcional -->
   {heroImage && (
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 mb-8">
-      <div class="rounded-xl overflow-hidden shadow-xl border border-brand-border-light dark:border-brand-border-dark max-h-[420px] bg-brand-surface-dark-elevated">
+      <div class="rounded-xl overflow-hidden shadow-lg border border-brand-border-light dark:border-brand-border-dark max-h-[420px] bg-gray-100 dark:bg-brand-surface-dark-elevated">
         <img
           src={heroImage.startsWith('http') || heroImage.startsWith('/') ? heroImage : `${base}/${heroImage.replace(/^\//, '')}`}
           alt={`Capa de ${title}`}
@@ -104,7 +104,7 @@ const readTime = calculateReadingTime(rawContent || description);
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
       <!-- Coluna de Leitura Central -->
       <div class="lg:col-span-3">
-        <article class="obsidian-prose prose prose-lg dark:prose-invert max-w-none prose-headings:text-brand-dark dark:prose-headings:text-brand-white prose-p:text-brand-dark/90 dark:prose-p:text-brand-white/90">
+        <article class="obsidian-prose prose prose-lg dark:prose-invert max-w-none prose-headings:text-gray-900 dark:prose-headings:text-brand-white prose-p:text-gray-800 dark:prose-p:text-gray-200">
           <slot />
         </article>
 
@@ -120,7 +120,7 @@ const readTime = calculateReadingTime(rawContent || description);
             href={`${base}/contato`}
             class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-brand-light hover:bg-brand-accent-hover rounded-md shadow-sm transition-colors"
           >
-            Solicitar Análise Semelhante
+            Solicitar Proposta Semelhante
           </a>
         </div>
       </div>
@@ -130,11 +130,11 @@ const readTime = calculateReadingTime(rawContent || description);
         <div class="sticky top-28 space-y-6">
           <TableOfContents headings={headings} />
 
-          <div class="p-4 rounded-lg bg-brand-light/5 border border-brand-border-light dark:border-brand-border-dark text-xs">
-            <h4 class="font-bold text-brand-dark dark:text-brand-white uppercase tracking-wider mb-2">
+          <div class="p-4 rounded-lg bg-gray-50 dark:bg-brand-surface-dark border border-brand-border-light dark:border-brand-border-dark text-xs">
+            <h4 class="font-bold text-gray-900 dark:text-brand-white uppercase tracking-wider mb-2">
               Leitura Otimizada
             </h4>
-            <p class="text-brand-muted-light dark:text-brand-muted-dark leading-relaxed">
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
               Equações matemáticas podem ser ampliadas tocando ou passando o mouse. Imagens e diagramas abrem em modal ao clicar.
             </p>
           </div>
@@ -160,13 +160,11 @@ const readTime = calculateReadingTime(rawContent || description);
 
           bq.classList.add('callout', `callout-${type}`);
 
-          // Remove a marcação [!TYPE] do primeiro elemento filho
           const firstP = bq.querySelector('p');
           if (firstP) {
             firstP.innerHTML = firstP.innerHTML.replace(/^\[!(NOTE|TIP|WARNING|IMPORTANT|DANGER|INFO|CAUTION)\](?:\s+.*)?\n?/i, '');
           }
 
-          // Cria elemento de título
           const titleEl = document.createElement('div');
           titleEl.className = 'callout-title';
           titleEl.innerHTML = `<span>✦</span><span>${customTitle}</span>`;
@@ -175,8 +173,11 @@ const readTime = calculateReadingTime(rawContent || description);
       });
     }
 
-    renderObsidianCallouts();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderObsidianCallouts);
+    } else {
+      renderObsidianCallouts();
+    }
     document.addEventListener('astro:after-swap', renderObsidianCallouts);
   </script>
 </BaseLayout>
-
